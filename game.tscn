@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://bd72xp3gyunds"]
+
+[ext_resource type="PackedScene" uid="uid://33ottkxvkw3j" path="res://ActionBoard.tscn" id="1_3hxw8"]
+[ext_resource type="Script" path="res://Button.gd" id="2_e41sw"]
+[ext_resource type="Script" path="res://Button2.gd" id="3_32rml"]
+[ext_resource type="Script" path="res://Button3.gd" id="4_yjwku"]
+
+[node name="Game" type="Node2D"]
+metadata/_edit_horizontal_guides_ = [540.0]
+metadata/_edit_vertical_guides_ = [960.0]
+
+[node name="ActionBoard" parent="." instance=ExtResource("1_3hxw8")]
+position = Vector2(960, 540)
+
+[node name="Button" type="Button" parent="."]
+offset_left = 1396.0
+offset_top = 340.0
+offset_right = 1544.0
+offset_bottom = 371.0
+text = "Regenerate Board"
+script = ExtResource("2_e41sw")
+
+[node name="Button2" type="Button" parent="."]
+offset_left = 1396.0
+offset_top = 396.0
+offset_right = 1514.0
+offset_bottom = 427.0
+text = "Resolve Board"
+script = ExtResource("3_32rml")
+
+[node name="Button3" type="Button" parent="."]
+offset_left = 1396.0
+offset_top = 462.0
+offset_right = 1495.0
+offset_bottom = 493.0
+text = "Clear Board"
+script = ExtResource("4_yjwku")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 181.0
+offset_top = 224.0
+offset_right = 243.0
+offset_bottom = 247.0
+text = "Actions:"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 209.0
+offset_top = 271.0
+offset_right = 249.0
+offset_bottom = 294.0

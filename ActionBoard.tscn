@@ -1,0 +1,134 @@
+[gd_scene load_steps=5 format=3 uid="uid://33ottkxvkw3j"]
+
+[ext_resource type="Texture2D" uid="uid://dimns7obkikvr" path="res://tempassets/Boardbg.png" id="1_sriwj"]
+[ext_resource type="Script" path="res://classes/Board.gd" id="2_wxsr6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2dh72"]
+size = Vector2(620, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3yqa5"]
+size = Vector2(10, 500)
+
+[node name="ActionBoard" type="Sprite2D"]
+texture = ExtResource("1_sriwj")
+script = ExtResource("2_wxsr6")
+
+[node name="Borders" type="Node2D" parent="."]
+
+[node name="TopBorder" type="StaticBody2D" parent="Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/TopBorder"]
+position = Vector2(0, -255)
+shape = SubResource("RectangleShape2D_2dh72")
+
+[node name="BottomBorder" type="StaticBody2D" parent="Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/BottomBorder"]
+position = Vector2(0, 255)
+shape = SubResource("RectangleShape2D_2dh72")
+
+[node name="LeftBorder" type="StaticBody2D" parent="Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/LeftBorder"]
+position = Vector2(-305, 0)
+shape = SubResource("RectangleShape2D_3yqa5")
+
+[node name="RightBorder" type="StaticBody2D" parent="Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/RightBorder"]
+position = Vector2(305, 0)
+shape = SubResource("RectangleShape2D_3yqa5")
+
+[node name="Nodes" type="Node2D" parent="."]
+
+[node name="00" type="Marker2D" parent="Nodes"]
+position = Vector2(-250, -200)
+
+[node name="10" type="Marker2D" parent="Nodes"]
+position = Vector2(-150, -200)
+
+[node name="20" type="Marker2D" parent="Nodes"]
+position = Vector2(-50, -200)
+
+[node name="30" type="Marker2D" parent="Nodes"]
+position = Vector2(50, -200)
+
+[node name="40" type="Marker2D" parent="Nodes"]
+position = Vector2(150, -200)
+
+[node name="50" type="Marker2D" parent="Nodes"]
+position = Vector2(250, -200)
+
+[node name="01" type="Marker2D" parent="Nodes"]
+position = Vector2(-250, -100)
+
+[node name="11" type="Marker2D" parent="Nodes"]
+position = Vector2(-150, -100)
+
+[node name="21" type="Marker2D" parent="Nodes"]
+position = Vector2(-50, -100)
+
+[node name="31" type="Marker2D" parent="Nodes"]
+position = Vector2(50, -100)
+
+[node name="41" type="Marker2D" parent="Nodes"]
+position = Vector2(150, -100)
+
+[node name="51" type="Marker2D" parent="Nodes"]
+position = Vector2(250, -100)
+
+[node name="02" type="Marker2D" parent="Nodes"]
+position = Vector2(-250, 0)
+
+[node name="12" type="Marker2D" parent="Nodes"]
+position = Vector2(-150, 0)
+
+[node name="22" type="Marker2D" parent="Nodes"]
+position = Vector2(-50, 0)
+
+[node name="32" type="Marker2D" parent="Nodes"]
+position = Vector2(50, 0)
+
+[node name="42" type="Marker2D" parent="Nodes"]
+position = Vector2(150, 0)
+
+[node name="52" type="Marker2D" parent="Nodes"]
+position = Vector2(250, 0)
+
+[node name="03" type="Marker2D" parent="Nodes"]
+position = Vector2(-250, 100)
+
+[node name="13" type="Marker2D" parent="Nodes"]
+position = Vector2(-150, 100)
+
+[node name="23" type="Marker2D" parent="Nodes"]
+position = Vector2(-50, 100)
+
+[node name="33" type="Marker2D" parent="Nodes"]
+position = Vector2(50, 100)
+
+[node name="43" type="Marker2D" parent="Nodes"]
+position = Vector2(150, 100)
+
+[node name="53" type="Marker2D" parent="Nodes"]
+position = Vector2(250, 100)
+
+[node name="04" type="Marker2D" parent="Nodes"]
+position = Vector2(-250, 200)
+
+[node name="14" type="Marker2D" parent="Nodes"]
+position = Vector2(-150, 200)
+
+[node name="24" type="Marker2D" parent="Nodes"]
+position = Vector2(-50, 200)
+
+[node name="34" type="Marker2D" parent="Nodes"]
+position = Vector2(50, 200)
+
+[node name="44" type="Marker2D" parent="Nodes"]
+position = Vector2(150, 200)
+
+[node name="54" type="Marker2D" parent="Nodes"]
+position = Vector2(250, 200)
+
+[node name="Orbs" type="Node2D" parent="."]
