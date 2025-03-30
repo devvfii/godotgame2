@@ -1,0 +1,478 @@
+[gd_scene load_steps=6 format=3 uid="uid://cxrf8r85tgn8i"]
+
+[ext_resource type="PackedScene" uid="uid://bco7lrynqaec" path="res://ver0.2/PlayerBox.tscn" id="1_xneks"]
+[ext_resource type="PackedScene" uid="uid://bv8au5uh8ovhq" path="res://ver0.2/EnemyBox.tscn" id="2_j4nti"]
+[ext_resource type="PackedScene" uid="uid://33ottkxvkw3j" path="res://ActionBoard.tscn" id="3_655mj"]
+[ext_resource type="Script" path="res://TurnManager.gd" id="4_l58yt"]
+[ext_resource type="Script" path="res://ver0.2/DebugButtons.gd" id="4_o166x"]
+
+[node name="Window" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopRibbon" type="Control" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 0.1
+grow_horizontal = 2
+
+[node name="BackgroundLayer" type="Control" parent="."]
+layout_mode = 1
+anchor_top = 0.1
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="PlayerBox" parent="." instance=ExtResource("1_xneks")]
+layout_mode = 1
+
+[node name="EnemyBox" parent="." instance=ExtResource("2_j4nti")]
+layout_mode = 1
+
+[node name="EventBox" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchor_left = 0.3
+anchor_top = 0.25
+anchor_right = 0.7
+anchor_bottom = 0.75
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Relics" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.1
+anchor_bottom = 0.8
+offset_right = 100.0
+
+[node name="ColorRect" type="ColorRect" parent="Relics"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="Relics"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="BattleElements" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Board" type="Control" parent="BattleElements"]
+custom_minimum_size = Vector2(600, 500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -750.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColumnContainer" type="HBoxContainer" parent="BattleElements/Board"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Column1" type="VBoxContainer" parent="BattleElements/Board/ColumnContainer"]
+custom_minimum_size = Vector2(100, 1000)
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column1"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column1"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect3" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column1"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect4" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column1"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect5" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column1"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect6" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column1"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect7" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column1"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect8" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column1"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect9" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column1"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect10" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column1"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Column2" type="VBoxContainer" parent="BattleElements/Board/ColumnContainer"]
+custom_minimum_size = Vector2(100, 1000)
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column2"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column2"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect3" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column2"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect4" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column2"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect5" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column2"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect6" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column2"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect7" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column2"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect8" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column2"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect9" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column2"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect10" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column2"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Column3" type="VBoxContainer" parent="BattleElements/Board/ColumnContainer"]
+custom_minimum_size = Vector2(100, 1000)
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column3"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column3"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect3" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column3"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect4" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column3"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect5" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column3"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect6" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column3"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect7" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column3"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect8" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column3"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect9" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column3"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect10" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column3"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Column4" type="VBoxContainer" parent="BattleElements/Board/ColumnContainer"]
+custom_minimum_size = Vector2(100, 1000)
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column4"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column4"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect3" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column4"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect4" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column4"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect5" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column4"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect6" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column4"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect7" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column4"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect8" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column4"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect9" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column4"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect10" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column4"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Column5" type="VBoxContainer" parent="BattleElements/Board/ColumnContainer"]
+custom_minimum_size = Vector2(100, 1000)
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column5"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column5"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect3" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column5"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect4" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column5"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect5" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column5"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect6" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column5"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect7" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column5"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect8" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column5"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect9" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column5"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect10" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column5"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Column6" type="VBoxContainer" parent="BattleElements/Board/ColumnContainer"]
+custom_minimum_size = Vector2(100, 1000)
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column6"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column6"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect3" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column6"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect4" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column6"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect5" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column6"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect6" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column6"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect7" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column6"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect8" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column6"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect9" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column6"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ColorRect10" type="ColorRect" parent="BattleElements/Board/ColumnContainer/Column6"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="ActionBoard" parent="BattleElements/Board" instance=ExtResource("3_655mj")]
+position = Vector2(300, 750)
+
+[node name="TurnManager" type="Node2D" parent="BattleElements/Board"]
+script = ExtResource("4_l58yt")
+
+[node name="ActionBar" type="Control" parent="BattleElements"]
+layout_mode = 1
+anchor_top = 0.8
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Skills" type="HBoxContainer" parent="BattleElements/ActionBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_right = 0.8
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="BattleElements/ActionBar/Skills"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="BattleElements/ActionBar/Skills"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="ColorRect3" type="ColorRect" parent="BattleElements/ActionBar/Skills"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="ColorRect4" type="ColorRect" parent="BattleElements/ActionBar/Skills"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="DebugButtons" type="Control" parent="."]
+z_index = 5
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_o166x")
+
+[node name="Button" type="Button" parent="DebugButtons"]
+layout_mode = 0
+offset_left = 1695.0
+offset_top = 90.0
+offset_right = 1892.0
+offset_bottom = 152.0
+text = "Take 10 damage"
+
+[node name="Button2" type="Button" parent="DebugButtons"]
+layout_mode = 0
+offset_left = 1695.0
+offset_top = 169.0
+offset_right = 1892.0
+offset_bottom = 231.0
+text = "Deal 10 damage"
+
+[node name="Button3" type="Button" parent="DebugButtons"]
+layout_mode = 0
+offset_left = 1433.0
+offset_top = 90.0
+offset_right = 1581.0
+offset_bottom = 121.0
+text = "Regenerate Board"
+
+[node name="Button4" type="Button" parent="DebugButtons"]
+layout_mode = 0
+offset_left = 1433.0
+offset_top = 152.0
+offset_right = 1551.0
+offset_bottom = 183.0
+text = "Resolve Board"
+
+[node name="Button5" type="Button" parent="DebugButtons"]
+layout_mode = 0
+offset_left = 1433.0
+offset_top = 212.0
+offset_right = 1532.0
+offset_bottom = 243.0
+text = "Clear Board"
+
+[node name="Button6" type="Button" parent="DebugButtons"]
+layout_mode = 0
+offset_left = 498.0
+offset_top = 90.0
+offset_right = 597.0
+offset_bottom = 121.0
+text = "Start Battle"
+
+[node name="Label3" type="Label" parent="DebugButtons"]
+layout_mode = 0
+offset_left = 349.0
+offset_top = 108.0
+offset_right = 389.0
+offset_bottom = 131.0
+text = "Turn"
+
+[connection signal="pressed" from="DebugButtons/Button" to="DebugButtons" method="_on_button_pressed"]
+[connection signal="resized" from="DebugButtons/Button" to="PlayerBox" method="_on_button_resized"]
+[connection signal="pressed" from="DebugButtons/Button2" to="DebugButtons" method="_on_button_2_pressed"]
+[connection signal="resized" from="DebugButtons/Button2" to="PlayerBox" method="_on_button_resized"]
+[connection signal="pressed" from="DebugButtons/Button3" to="DebugButtons" method="_on_button_3_pressed"]
+[connection signal="pressed" from="DebugButtons/Button4" to="DebugButtons" method="_on_button_4_pressed"]
+[connection signal="pressed" from="DebugButtons/Button5" to="DebugButtons" method="_on_button_5_pressed"]
+[connection signal="pressed" from="DebugButtons/Button6" to="DebugButtons" method="_on_button_6_pressed"]

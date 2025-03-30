@@ -7,4 +7,4 @@ func _ready():
 
 
 func _button_pressed():
-	get_node("../ActionBoard").clearBoard()
+	get_node("../BattleLayer/ActionBoard").clearBoard()

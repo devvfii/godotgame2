@@ -13,16 +13,18 @@ config_version=5
 config/name="StSPaDClone"
 config/description="game attempt 3"
 config/version="0"
-run/main_scene="res://game.tscn"
+run/main_scene="res://ver0.2/Window.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+SignalManager="*res://classes/SignalManager.gd"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=3
-window/size/resizable=false
 
 [editor]
 

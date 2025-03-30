@@ -8,7 +8,7 @@ extends Sprite2D
 									preload("res://tempassets/pinkOrb.png"),
 									preload("res://tempassets/redOrb.png")]
 @onready var new_orb_scene = preload("res://orb.tscn")
-
+@onready var turn_manager = $"../TurnManager"
 
 var node_link : Dictionary = {}
 var orb_link : Dictionary = {}
@@ -20,6 +20,9 @@ const ROWS = 5
 const COLS = 6
 
 func _ready():
+	SignalManager.orb_swap.connect(orbSwap)
+	SignalManager.orb_dropped.connect(orbDropped)
+	
 	for child in nodes.get_children():
 		node_link[child.position] = child
 	
@@ -34,10 +37,6 @@ func regenerateBoard():
 			
 			orb_link[node.position] = neworb
 			orbs.add_child(neworb)
-			neworb.orb_swap.connect(orbSwap)
-			neworb.orb_selectable.connect(orbSelectable)
-			neworb.orb_selected.connect(orbSelected)
-			neworb.orb_dropped.connect(orbDropped)
 
 func resolveBoard():
 	var current_orb : Orb
@@ -81,19 +80,46 @@ func resolveBoard():
 		
 		resolved = []
 	
-	print(combos)
-	for i in combos:
-		$"../Label2".text += str(i) + "\n"
-	enableSelectionListener()
+	turn_actions = []
+	for action_list in combos:
+		$"../../../DebugButtons/Label2".text += str(action_list) + "\n"
+		var attack_actions = []
+		var block_actions = []
+		var heal_actions = []
+		
+		for action in action_list:
+			var action_instance = ActionInstance.new()
+			
+			action_instance.orb_count = action[1]
+			action_instance.actor = turn_manager.player
+			match action[0]:
+				"MELEE":
+					action_instance.instance_type = ActionInstance.TYPE.MATTACK
+					attack_actions.append(action_instance)
+				"RANGED":
+					action_instance.instance_type = ActionInstance.TYPE.RATTACK
+					attack_actions.append(action_instance)
+				"CHARGE":
+					# just add to resource
+					continue
+				"BLOCK":
+					action_instance.instance_type = ActionInstance.TYPE.BLOCK
+					block_actions.append(action_instance)
+				"HEAL":
+					action_instance.instance_type = ActionInstance.TYPE.HEAL
+					heal_actions.append(action_instance)
+
+		turn_actions.append_array(attack_actions)
+		turn_actions.append_array(block_actions)
+		turn_actions.append_array(heal_actions)
+	
+	SignalManager.actions_populated.emit(turn_actions)
 	
 func clearBoard():
 	for node in nodes.get_children():
 		if orb_link.has(node.position):
 			orb_link[node.position].queue_free()
 			orb_link.erase(node.position)
-
-func orbSelectable(orb : Orb):
-	orb.selectable = true
 	
 func orbSwap(selectedOrb : Orb, orb : Orb):
 	var temp_position = selectedOrb.board_position
@@ -105,8 +131,6 @@ func orbSwap(selectedOrb : Orb, orb : Orb):
 	selectedOrb.moveTo(selectedOrb.board_position)
 	orb.moveTo(orb.board_position)
 
-func orbSelected(_orb : Orb):
-	disableSelectionListener()
 
 func orbDropped(orb : Orb):
 	orb.moveTo(orb.board_position)
@@ -155,7 +179,7 @@ func resolveOrbs(toResolve : Array):
 		if current_orb.resolved:
 			continue
 		var count = floodFill(current_orb.board_position, toResolve, current_orb.orb_type)
-		final_combos.append(current_orb.orb_color + " : " + str(count))
+		final_combos.append([current_orb.orb_type,count])
 	
 	return final_combos
 
@@ -178,11 +202,3 @@ func floodFill(position : Vector2, array : Array, type : String):
 	
 	return total
 
-
-func disableSelectionListener():
-	for orb in orbs.get_children():
-		orb.orb_selectable.disconnect(orbSelectable)
-
-func enableSelectionListener():
-	for orb in orbs.get_children():
-		orb.orb_selectable.connect(orbSelectable)

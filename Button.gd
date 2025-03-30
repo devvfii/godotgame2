@@ -7,4 +7,4 @@ func _ready():
 
 
 func _button_pressed():
-	get_node("../ActionBoard").regenerateBoard()
+	get_node("../BattleLayer/ActionBoard").regenerateBoard()

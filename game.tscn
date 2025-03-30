@@ -1,50 +1,90 @@
-[gd_scene load_steps=5 format=3 uid="uid://bd72xp3gyunds"]
+[gd_scene load_steps=11 format=3 uid="uid://bd72xp3gyunds"]
 
 [ext_resource type="PackedScene" uid="uid://33ottkxvkw3j" path="res://ActionBoard.tscn" id="1_3hxw8"]
 [ext_resource type="Script" path="res://Button.gd" id="2_e41sw"]
 [ext_resource type="Script" path="res://Button2.gd" id="3_32rml"]
 [ext_resource type="Script" path="res://Button3.gd" id="4_yjwku"]
+[ext_resource type="Texture2D" uid="uid://b4nfcqvg866ge" path="res://tempassets/player.png" id="5_45u4k"]
+[ext_resource type="Script" path="res://classes/Player.gd" id="5_qt67f"]
+[ext_resource type="Script" path="res://classes/Enemy.gd" id="6_c8b78"]
+[ext_resource type="Texture2D" uid="uid://5kaqebiabwy1" path="res://tempassets/enemy.png" id="7_fteok"]
+[ext_resource type="Texture2D" uid="uid://i81tmivslje1" path="res://screenref/Untitled.png" id="9_0qg4t"]
+[ext_resource type="Script" path="res://TurnManager.gd" id="9_jfqy0"]
 
 [node name="Game" type="Node2D"]
 metadata/_edit_horizontal_guides_ = [540.0]
 metadata/_edit_vertical_guides_ = [960.0]
 
-[node name="ActionBoard" parent="." instance=ExtResource("1_3hxw8")]
-position = Vector2(960, 540)
-
 [node name="Button" type="Button" parent="."]
-offset_left = 1396.0
-offset_top = 340.0
-offset_right = 1544.0
-offset_bottom = 371.0
+offset_left = 660.0
+offset_top = 169.0
+offset_right = 808.0
+offset_bottom = 200.0
 text = "Regenerate Board"
 script = ExtResource("2_e41sw")
 
 [node name="Button2" type="Button" parent="."]
-offset_left = 1396.0
-offset_top = 396.0
-offset_right = 1514.0
-offset_bottom = 427.0
+offset_left = 910.0
+offset_top = 169.0
+offset_right = 1028.0
+offset_bottom = 200.0
 text = "Resolve Board"
 script = ExtResource("3_32rml")
 
 [node name="Button3" type="Button" parent="."]
-offset_left = 1396.0
-offset_top = 462.0
-offset_right = 1495.0
-offset_bottom = 493.0
+offset_left = 1166.0
+offset_top = 169.0
+offset_right = 1265.0
+offset_bottom = 200.0
 text = "Clear Board"
 script = ExtResource("4_yjwku")
 
 [node name="Label" type="Label" parent="."]
-offset_left = 181.0
-offset_top = 224.0
-offset_right = 243.0
-offset_bottom = 247.0
+offset_left = 45.0
+offset_top = 223.0
+offset_right = 107.0
+offset_bottom = 246.0
 text = "Actions:"
 
 [node name="Label2" type="Label" parent="."]
-offset_left = 209.0
-offset_top = 271.0
-offset_right = 249.0
-offset_bottom = 294.0
+offset_left = 68.0
+offset_top = 264.0
+offset_right = 108.0
+offset_bottom = 287.0
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 224.0
+offset_top = 124.0
+offset_right = 264.0
+offset_bottom = 147.0
+text = "Turn"
+
+[node name="BattleLayer" type="Node2D" parent="."]
+
+[node name="ActionBoard" parent="BattleLayer" instance=ExtResource("1_3hxw8")]
+position = Vector2(960, 540)
+
+[node name="TurnManager" type="Node2D" parent="BattleLayer"]
+script = ExtResource("9_jfqy0")
+
+[node name="Enemies" type="Node" parent="BattleLayer/TurnManager"]
+
+[node name="EnemyEntity" type="Sprite2D" parent="BattleLayer/TurnManager/Enemies"]
+visible = false
+position = Vector2(1587, 518)
+scale = Vector2(1.10217, 1.10217)
+texture = ExtResource("7_fteok")
+script = ExtResource("6_c8b78")
+
+[node name="PlayerEntity" type="Sprite2D" parent="BattleLayer/TurnManager"]
+position = Vector2(372, 576)
+scale = Vector2(0.244977, 0.244977)
+texture = ExtResource("5_45u4k")
+script = ExtResource("5_qt67f")
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.223529)
+z_index = -50
+position = Vector2(960, 540)
+texture = ExtResource("9_0qg4t")
+metadata/_edit_lock_ = true

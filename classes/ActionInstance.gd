@@ -1,6 +1,6 @@
 class_name ActionInstance
 
-enum TYPE {ATTACK, BLOCK, HEAL}
+enum TYPE {MATTACK, RATTACK, BLOCK, HEAL}
 enum SPECIALS {PLUS, TSHAPE, LSHAPE, BLOCK}
 
 var actor : Entity
