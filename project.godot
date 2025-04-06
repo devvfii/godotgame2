@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 SignalManager="*res://classes/SignalManager.gd"
+RngManager="*res://classes/RNGManager.gd"
 
 [display]
 

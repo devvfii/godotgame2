@@ -7,7 +7,7 @@ extends Sprite2D
 									preload("res://tempassets/blueOrb.png"),
 									preload("res://tempassets/pinkOrb.png"),
 									preload("res://tempassets/redOrb.png")]
-@onready var new_orb_scene = preload("res://orb.tscn")
+@onready var new_orb_scene = preload("res://ver0.2/orb.tscn")
 @onready var turn_manager = $"../TurnManager"
 
 var node_link : Dictionary = {}
@@ -15,13 +15,16 @@ var orb_link : Dictionary = {}
 var turn_actions : Array[ActionInstance] = []
 
 var target_orb : Orb
+var orb_swapped : bool = false
 
 const ROWS = 5
 const COLS = 6
 
 func _ready():
-	SignalManager.orb_swap.connect(orbSwap)
+	SignalManager.orb_swapped.connect(orbSwap)
 	SignalManager.orb_dropped.connect(orbDropped)
+	
+	SignalManager.regenerate_board.connect(regenerateBoard)
 	
 	for child in nodes.get_children():
 		node_link[child.position] = child
@@ -60,7 +63,7 @@ func resolveBoard():
 		
 		for orb in resolved:
 			if orb_link.has(orb.board_position):
-				orb_link[orb.position].queue_free()
+				orb_link[orb.position].queue_for_deletion()
 				orb_link.erase(orb.position)
 		
 		# let orbs drop
@@ -100,8 +103,7 @@ func resolveBoard():
 					action_instance.instance_type = ActionInstance.TYPE.RATTACK
 					attack_actions.append(action_instance)
 				"CHARGE":
-					# just add to resource
-					continue
+					turn_manager.player.charge(action[1])
 				"BLOCK":
 					action_instance.instance_type = ActionInstance.TYPE.BLOCK
 					block_actions.append(action_instance)
@@ -118,22 +120,22 @@ func resolveBoard():
 func clearBoard():
 	for node in nodes.get_children():
 		if orb_link.has(node.position):
-			orb_link[node.position].queue_free()
+			orb_link[node.position].queue_for_deletion()
 			orb_link.erase(node.position)
 	
 func orbSwap(selectedOrb : Orb, orb : Orb):
-	var temp_position = selectedOrb.board_position
-	selectedOrb.board_position = orb.board_position
-	orb.board_position = temp_position
-	
 	orb_link[selectedOrb.board_position] = selectedOrb
 	orb_link[orb.board_position] = orb
-	selectedOrb.moveTo(selectedOrb.board_position)
-	orb.moveTo(orb.board_position)
-
+	
+	orb_swapped = true
 
 func orbDropped(orb : Orb):
 	orb.moveTo(orb.board_position)
+	
+	if orb_swapped:
+		resolveBoard()
+	
+	orb_swapped = false
 	
 func checkOrbMatches(orb : Orb):
 	var current_orb = orb

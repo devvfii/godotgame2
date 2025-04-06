@@ -8,12 +8,19 @@ var target : Entity
 var max_hp := 100.0
 var current_hp := max_hp
 var current_block := 0.0
+
 var base_atk := 5.0
 var effective_atk := base_atk
+
 var base_block := 5.0
 var effective_block := base_block
+
 var base_heal := 3.0
 var effective_heal := base_heal
+
+var charge_storage := 0
+var base_charge := 3
+var effective_charge := base_charge
 
 var sprite : AnimatedSprite2D
 var h_flip : bool
@@ -38,6 +45,10 @@ func block(value : int):
 	current_block += value
 	print("%s blocked for %s." % [entity_name, value])
 
+func charge(value : int):
+	charge_storage += value
+	print("%s charged %s orbs." % [entity_name, value])
+
 func resolve_action(action : ActionInstance):
 	calculate_effective_stats(action.orb_count - 2)
 	
@@ -59,6 +70,9 @@ func calculate_effective_stats(factor : int):
 	effective_atk = base_atk * factor
 	effective_block = base_block * factor
 	effective_heal = base_heal * factor
+
+func turn_completed():
+	pass
 
 func isDead():
 	return (current_hp <= 0)

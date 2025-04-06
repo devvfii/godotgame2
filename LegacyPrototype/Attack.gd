@@ -7,7 +7,7 @@ var final_damage : float
 var attack_type : RANGE
 
 func _init(actor:Entity, orb_count:int, special_string, target:Entity):
-	instance_type = TYPE.ATTACK
+	instance_type = TYPE.MATTACK
 	
 	self.actor = actor
 	self.target = target
