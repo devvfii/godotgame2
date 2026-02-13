@@ -1,0 +1,82 @@
+Prototype event system
+	Store event data in JSON
+	Parse JSON file to load into one controller to handle random events.
+		Should events be decided when map is generated or should it be on-load?
+		Tying it to map generation makes it tied in with the seed. Want this
+	
+	Event data needs:
+		name - must be unique per event
+		duplicate possible - flag indicating if event is allowed multiple times in one run
+		dependency - pre-requisite events before it is added to pool
+		event data - (array?)
+			layout type - preset screen layout (monologue, dialogue, char vn style, art focus vn style)
+			text-var - defines a block of text (as much vars as needed)
+			image-var - defines an image (as much vars as needed)
+			option-var - array of text blocks as options? (as much vars as needed)
+			enemy-var - (array/variables needed for enemy instance)
+		script - (maybe a sequential list? have some preset custom functions) ex. [text-var1, image-var1, floaty(text-var2), wait(3), text-var3, option-var]
+		result - (array? custom functions. allow combinations of options) (is there a way to maybe type code directly to evaluate later?)
+			option1 - [give-item, relic, efi]
+			option2 - [temp-debuff, -5, 2 (nodes), str, efi]
+			(option3,option2) - [permanent-debuff, -1, str, efi]
+
+split by pipe -> split by space
+In script: each line is continuous (Queue?) Then each array index is one
+event_script = [
+		"Efi enter left 0.5 | Efi say line1",
+		"Efi slide 0.25 | Slime enter right 0.75 | Slime say line2",
+		"Efi say line2",
+		"Efi say line3"
+	]
+event_data = {
+		"Efi" : ["Object", "Character"],
+		"Slime" : ["Object", "Character"],
+		"line1" : ["Text", "Testing text animation, display, lorem ipsum dolor sit amet"],
+		"line2" : ["Text", "..."],
+		"line3" : ["Text", "Alright. Time to die."],
+		"line4" : ["Text", "Testing text animation, display, lorem ipsum dolor sit amet"],
+		"line5" : ["Text", "5"],
+		"line6" : ["Text", "6"],
+		"line7" : ["Text", "7"],
+		"line8" : ["Text", "8"],
+		"line9" : ["Text", "9"],
+		"line10" : ["Text", "10"]
+	}
+
+Char VN Style
+Maximum of 4 big characters on screen, maybe around ~30% of screen width per character if all 4 present, bounding boxes will overlap. 
+	centers should maybe be locked to one axis of movement 0-100% screen width, but should support small vn features such as:
+		overlay to highlight focus
+		small grow also for focus (optional/toggleable)
+		move to point in axis, depending on screen width
+		movement and timings will be set on event data script
+		flipping
+		sprite changes and maybe idle animations
+		exit right or left (maybe also up and down)?
+Characters Bust up? Full body? Bounding box extends to bottom of screen so maybe leave to dev discretion.
+Textbox should also support small vn features for now, maybe can support crazy ones later
+	The typewriter-like animation
+	Word effects and color. Maybe fonts won't be that hard either.
+	Text pacing, etc...
+
+Font size 14 (?)
+
+notes:
+figure out proper easing functions to use with linear interpolation
+try it with sprite animations - maybe use multiple animation players to seperate/blend some animations (maybe separate states and actions)
+abstraction for classes
+support for more character boxes and dynamic balancing
+implement animation queue
+
+
+putting actual parsing from file till after I'm satisfied with my VN functions
+
+
+
+Gameplay: 
+1. Make new generic enemy types, set up multiple targets in one fight?
+	max 3 wide x 2 high in enemies, EnemyBox to handle arrangement
+	targeting system
+	
+	4 orb detection whether main length is vertical or horizontal, which will determine what direction it will pierce
+	

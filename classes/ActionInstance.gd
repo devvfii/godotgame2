@@ -17,3 +17,9 @@ var special_type : SPECIALS
 var debug_name : String
 
 var damage : int
+
+func _init(actor, target, damage, attack_name):
+	self.actor = actor
+	self.target = target
+	self.damage = damage
+	self.debug_name = attack_name

@@ -1,0 +1,13 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://uailwqvxq550"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gtptg"]
+bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[resource]
+HScrollBar/styles/grabber = SubResource("StyleBoxFlat_gtptg")
+HScrollBar/styles/grabber_highlight = null
+HScrollBar/styles/grabber_pressed = null

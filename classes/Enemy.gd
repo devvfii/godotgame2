@@ -1,43 +1,16 @@
-extends Entity
 class_name Enemy
+extends Entity
 
 var action_roll : int
-#AI RNG goes here? this will just hold RNG 0-99. indiv enemy classes will have actions tied into the 0-99
-var attacks := ["DEBUFF", "CHARGE", "BIG_SLAM"]
+var attacks : Array[String]
 var action_instances : Array[ActionInstance]
 
 var current_intent : ActionInstance
 
 func _ready():
 	SignalManager.resized.connect(update_properties)
-	entity_name = "Enemy"
-	
-	# temp setting
-	max_hp = 70
-	current_hp = 55
-	
-	var big_slam = ActionInstance.new()
-	big_slam.actor = self
-	big_slam.target = target
-	big_slam.damage = 50
-	big_slam.debug_name = "BIG_SLAM"
-	
-	var debuff = ActionInstance.new()
-	debuff.actor = self
-	debuff.target = target
-	debuff.damage = 20
-	debuff.debug_name = "DEBUFF"
-	
-	var charge = ActionInstance.new()
-	charge.actor = self
-	charge.target = target
-	charge.damage = 0
-	charge.debug_name = "CHARGE"
-	
-	action_instances = [debuff, charge, big_slam]
-	
-	get_parent().set_entity_owner(self)
-	
+	set_target([GlobalConstants.player_object])
+	set_base()
 	update_properties()
 	
 func update_properties():
@@ -46,14 +19,26 @@ func update_properties():
 
 func decide_action():
 	current_intent = RngManager.pick_from(action_instances)
-	
 	SignalManager.intent_changed.emit(self)
+
+func roll_rng():
+	action_roll = RngManager.randi_range(0,99)
 
 func set_target(possible_targets : Array):
 	target = RngManager.pick_from(possible_targets)
 
-func resolve_action(action : ActionInstance):
+func set_base():
+	var basic_attack = ActionInstance.new(self, target, effective_atk, "ATTACK")
+	var basic_block = ActionInstance.new(self, target, effective_block, "BLOCK")
+	
+	action_instances.append_array([basic_attack, basic_block])
+	decide_action()
+
+func resolve_action(_action : ActionInstance):
 	print("%s did %s." % [entity_name, current_intent.debug_name])
 	target.takeDamage(current_intent.damage)
+	
+	if not isDead():
+		decide_action()
 	
 	SignalManager.enemy_turn_completed.emit()

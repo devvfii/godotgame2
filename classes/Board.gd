@@ -17,24 +17,25 @@ var turn_actions : Array[ActionInstance] = []
 var target_orb : Orb
 var orb_swapped : bool = false
 
+var orb_deletion_queue : Array = []
+
 const ROWS = 5
 const COLS = 6
 
 func _ready():
 	SignalManager.orb_swapped.connect(orbSwap)
 	SignalManager.orb_dropped.connect(orbDropped)
+	SignalManager.orb_deleted.connect(wait_for_deletion_queue)
 	
 	SignalManager.regenerate_board.connect(regenerateBoard)
 	
 	for child in nodes.get_children():
 		node_link[child.position] = child
-	
-	regenerateBoard()
 
 func regenerateBoard():
 	for node in nodes.get_children():
 		if node.position not in orb_link:
-			var rng = randi_range(0,4)
+			var rng = RngManager.randi_range(0,4)
 			var neworb = new_orb_scene.instantiate()
 			neworb.newOrb(rng, temp_orb_asset_paths[rng], node.position)
 			
@@ -63,8 +64,11 @@ func resolveBoard():
 		
 		for orb in resolved:
 			if orb_link.has(orb.board_position):
-				orb_link[orb.position].queue_for_deletion()
+				orb_deletion_queue.append(orb)
+				orb.queue_for_deletion()
 				orb_link.erase(orb.position)
+		
+		await SignalManager.all_orbs_resolved
 		
 		# let orbs drop
 		var tempArray = nodes.get_children()
@@ -91,10 +95,9 @@ func resolveBoard():
 		var heal_actions = []
 		
 		for action in action_list:
-			var action_instance = ActionInstance.new()
+			var action_instance = ActionInstance.new(turn_manager.player, turn_manager.player.target, 0, action[0])
 			
 			action_instance.orb_count = action[1]
-			action_instance.actor = turn_manager.player
 			match action[0]:
 				"MELEE":
 					action_instance.instance_type = ActionInstance.TYPE.MATTACK
@@ -120,6 +123,7 @@ func resolveBoard():
 func clearBoard():
 	for node in nodes.get_children():
 		if orb_link.has(node.position):
+			orb_deletion_queue.append(orb_link[node.position])
 			orb_link[node.position].queue_for_deletion()
 			orb_link.erase(node.position)
 	
@@ -204,3 +208,9 @@ func floodFill(position : Vector2, array : Array, type : String):
 	
 	return total
 
+func wait_for_deletion_queue(orb : Orb):
+	if orb in orb_deletion_queue:
+		orb_deletion_queue.erase(orb)
+	
+	if orb_deletion_queue == []:
+		SignalManager.all_orbs_resolved.emit()

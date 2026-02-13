@@ -23,13 +23,10 @@ func _on_button_5_pressed():
 	$"../BattleElements/Board/ActionBoard".clearBoard()
 
 
-func _on_button_6_pressed():
-	$"../BattleElements/Board/TurnManager".start_battle($"../PlayerBox".entity_owner,$"../EnemyBox".entity_owner)
-
-
 func enemy_intent_changed(enemy : Enemy):
 	$Label6.text = enemy.current_intent.debug_name
-	print("%s will %s." % [enemy.entity_name, enemy.current_intent.debug_name])
+	if not enemy.isDead():
+		print("%s will %s." % [enemy.entity_name, enemy.current_intent.debug_name])
 
 
 func _on_button_7_pressed():

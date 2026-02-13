@@ -1,0 +1,91 @@
+[gd_scene load_steps=6 format=3 uid="uid://ctw0c4vuforxc"]
+
+[ext_resource type="Script" path="res://ver0.2/MapData.gd" id="1_k0cut"]
+[ext_resource type="Theme" uid="uid://uailwqvxq550" path="res://ver0.2/vscrolltheme.tres" id="2_d72sb"]
+[ext_resource type="Script" path="res://ver0.2/MapDebug.gd" id="2_kpyvt"]
+
+[sub_resource type="Gradient" id="Gradient_fv6fr"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fkq3y"]
+gradient = SubResource("Gradient_fv6fr")
+
+[node name="Map" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_k0cut")
+
+[node name="Nodes" type="ScrollContainer" parent="."]
+clip_contents = false
+custom_minimum_size = Vector2(1000, 600)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -304.0
+offset_right = 960.0
+offset_bottom = 304.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_d72sb")
+vertical_scroll_mode = 0
+
+[node name="Control" type="PanelContainer" parent="Nodes"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Background" type="TextureRect" parent="Nodes/Control"]
+visible = false
+layout_mode = 2
+texture = SubResource("GradientTexture2D_fkq3y")
+
+[node name="MapDebug" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 460.0
+offset_bottom = 236.0
+mouse_filter = 1
+script = ExtResource("2_kpyvt")
+
+[node name="Button" type="Button" parent="MapDebug"]
+layout_mode = 0
+offset_left = 121.0
+offset_top = 52.0
+offset_right = 341.0
+offset_bottom = 85.0
+text = "Generate Small"
+
+[node name="Button2" type="Button" parent="MapDebug"]
+layout_mode = 0
+offset_left = 121.0
+offset_top = 120.0
+offset_right = 341.0
+offset_bottom = 153.0
+text = "Generate Medium"
+
+[node name="Button3" type="Button" parent="MapDebug"]
+layout_mode = 0
+offset_left = 121.0
+offset_top = 185.0
+offset_right = 341.0
+offset_bottom = 218.0
+text = "Generate Big"
+
+[node name="Button4" type="Button" parent="MapDebug"]
+layout_mode = 0
+offset_left = 1451.0
+offset_top = 85.0
+offset_right = 1671.0
+offset_bottom = 118.0
+text = "Toggle Map"
+
+[connection signal="pressed" from="MapDebug/Button" to="MapDebug" method="_on_button_pressed"]
+[connection signal="pressed" from="MapDebug/Button2" to="MapDebug" method="_on_button_2_pressed"]
+[connection signal="pressed" from="MapDebug/Button3" to="MapDebug" method="_on_button_3_pressed"]
+[connection signal="pressed" from="MapDebug/Button4" to="MapDebug" method="_on_button_4_pressed"]

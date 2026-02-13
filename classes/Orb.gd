@@ -1,5 +1,5 @@
-extends Sprite2D
 class_name Orb
+extends Sprite2D
 
 enum TYPE {MELEE, RANGED, BLOCK, HEAL, CHARGE, JAMMER, BOMB}
 enum COLOR {YELLOW, GREEN, BLUE, PINK, RED, STAR, BOMB}
@@ -59,11 +59,12 @@ func _physics_process(delta):
 			if self.hitbox.overlaps_area(last_swapped_with[0].hitbox) and global_position.distance_to(last_swapped_with[0].board_position) < last_swapped_with[1]:
 				orb_swap(last_swapped_with[0])
 	elif sprite.global_position != global_position:
-		sprite.global_position = sprite.global_position.move_toward(global_position, delta * 1000.0)
+		sprite.global_position = sprite.global_position.move_toward(global_position, delta * 1250.0)
 	
 	if resolved or deleted:
 		sprite.self_modulate.a = move_toward(sprite.self_modulate.a, 0.0, delta * 2.0)
 		if sprite.self_modulate.a == 0.0:
+			SignalManager.orb_deleted.emit(self)
 			self.queue_free()
 
 func _on_hitbox_mouse_entered():
@@ -90,14 +91,16 @@ func orb_selected(orb : Orb):
 		selected = true
 	else:
 		temp_disable = true
-		SignalManager.orb_selected.disconnect(orb_selected)
+		if SignalManager.orb_selected.is_connected(orb_selected):
+			SignalManager.orb_selected.disconnect(orb_selected)
 
 func orb_dropped(orb : Orb):
 	if orb == self:
 		selected = false
 	else:
 		temp_disable = false
-		SignalManager.orb_selected.connect(orb_selected)
+		if !SignalManager.orb_selected.is_connected(orb_selected):
+			SignalManager.orb_selected.connect(orb_selected)
 
 func orb_swap(orb : Orb):
 	var temp_position = board_position

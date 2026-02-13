@@ -2,6 +2,9 @@ extends Node
 
 var rng = RandomNumberGenerator.new()
 
+var temp : Array
+var temp2 : Array
+
 func _ready():
 	rng.randomize()
 
@@ -21,8 +24,8 @@ func pick_from(input_array : Array, weights : Array = []):
 	if len(weights) == 0:
 		return input_array[rng.randi_range(0,len(input_array)-1)]
 	
-	var temp = []
-	var temp2 = []
+	temp = []
+	temp2 = []
 	for i in weights:
 		for j in range(i):
 			temp2 = []

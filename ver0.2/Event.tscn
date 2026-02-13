@@ -1,0 +1,107 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3ncf4a4lqueq"]
+
+[ext_resource type="Script" path="res://ver0.2/Event.gd" id="1_7er47"]
+[ext_resource type="Texture2D" uid="uid://bujitr72b4qcx" path="res://tempassets/stsbg.png" id="1_rbvsl"]
+[ext_resource type="Theme" uid="uid://ifpgfquik1sx" path="res://tempassets/DialogueBorder.tres" id="3_wt8gk"]
+[ext_resource type="Script" path="res://ver0.2/Name.gd" id="5_bvii2"]
+[ext_resource type="Script" path="res://ver0.2/DialogueBox.gd" id="5_d5enp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pbl3q"]
+content_margin_left = 10.0
+content_margin_top = 1.0
+content_margin_right = 50.0
+content_margin_bottom = 1.0
+bg_color = Color(0.0980392, 0.396078, 0.619608, 0.737255)
+corner_radius_top_right = 285
+corner_detail = 1
+
+[node name="Event" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7er47")
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Image" type="TextureRect" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_rbvsl")
+
+[node name="SpriteLayer" type="CanvasLayer" parent="."]
+
+[node name="BottomAnchor" type="Control" parent="SpriteLayer"]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="DialogueLayer" type="CanvasLayer" parent="."]
+
+[node name="DialogueBox" type="PanelContainer" parent="DialogueLayer"]
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.7
+anchor_right = 0.9
+anchor_bottom = 0.925
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("3_wt8gk")
+script = ExtResource("5_d5enp")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DialogueLayer/DialogueBox"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/bold_font_size = 40
+theme_override_font_sizes/italics_font_size = 40
+theme_override_font_sizes/bold_italics_font_size = 40
+theme_override_font_sizes/mono_font_size = 40
+bbcode_enabled = true
+text = "[wave amp=200 freq=4.0 connected=1]Wave[/wave] [i]Neat[/i]	[color=#FF0000]red[/color]		[pulse]asd[/pulse]
+[shake rate =10.0 level=30]Shake[/shake] Test [rainbow] dont say it [/rainbow]
+The quick brown fox jumps over the head of the lazy dog. [b]Test[/b]"
+scroll_active = false
+
+[node name="Name" type="PanelContainer" parent="DialogueLayer"]
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.66
+anchor_right = 0.3
+anchor_bottom = 0.7
+offset_top = 0.199951
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pbl3q")
+script = ExtResource("5_bvii2")
+
+[node name="Label" type="Label" parent="DialogueLayer/Name"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 27
+text = "Psi"
+horizontal_alignment = 1
+
+[node name="ContinueIndicator" type="Control" parent="DialogueLayer"]
+layout_mode = 3
+anchor_left = 0.88
+anchor_top = 0.9
+anchor_right = 0.88
+anchor_bottom = 0.9
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Polygon2D" type="Polygon2D" parent="DialogueLayer/ContinueIndicator"]
+position = Vector2(20.4, 20.4)
+scale = Vector2(0.592, 0.592)
+polygon = PackedVector2Array(0, 0, 50, 25, 0, 50)

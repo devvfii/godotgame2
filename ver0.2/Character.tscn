@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3 uid="uid://ct64362pjcolq"]
+
+[ext_resource type="Texture2D" uid="uid://b4nfcqvg866ge" path="res://tempassets/player.png" id="1_n4mxp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f7dwi"]
+atlas = ExtResource("1_n4mxp")
+region = Rect2(0, 0, 1207, 1878)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8xf72"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f7dwi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_buu8s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Character/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_pj0wu"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Character/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_110pa"]
+_data = {
+"RESET": SubResource("Animation_buu8s"),
+"idle": SubResource("Animation_pj0wu")
+}
+
+[node name="Character" type="Node2D"]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(-7.62939e-06, 0)
+scale = Vector2(0.541171, 0.534309)
+sprite_frames = SubResource("SpriteFrames_8xf72")
+
+[node name="StateAnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_110pa")
+}

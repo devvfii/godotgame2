@@ -24,6 +24,10 @@ func start_battle(player : Entity, enemy : Entity):
 	self.player = player
 	self.enemy = enemy
 	
+	current_turn = TURN.PLAYER
+	current_state = STATES.PLANNING
+	player_actions.clear()
+	
 	battle_ongoing = true
 	
 	$"../../../DebugButtons/Label5".text = str(player.effective_charge)
@@ -34,7 +38,6 @@ func start_battle(player : Entity, enemy : Entity):
 		match current_turn:
 			TURN.PLAYER:
 				SignalManager.state_changed.emit(state_names[current_state])
-				enemy.decide_action()
 				
 				# wait until actions are populated
 				await SignalManager.player_turn_completed
@@ -56,10 +59,12 @@ func start_battle(player : Entity, enemy : Entity):
 				print("Enemy turn ended")
 				# end turn
 				current_turn = TURN.PLAYER
+				current_state = STATES.PLANNING
 				
 				SignalManager.full_turn_completed.emit()
 	
 	print("Battle has ended.")
+	SignalManager.exit_combat.emit(player)
 
 func _on_action_board_actions_populated(action_array):
 	self.player_actions = action_array
@@ -88,6 +93,7 @@ func entity_death(entity : Entity):
 		# trigger game over
 		print("Psi has died. Game over.")
 	elif entity == enemy:
+		# temp
 		print("Enemy has died.")
 	
 	battle_ongoing = false

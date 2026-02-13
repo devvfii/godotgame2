@@ -1,19 +1,30 @@
-extends Entity
 class_name Player
+extends Entity
+
+func _init(display_name):
+	setName(display_name)
+	texture = preload("res://tempassets/player.png")
+	visible = false
+	GlobalConstants.player_object = self
+	set_base_stats()
 
 # option select functionality
 func _ready():
 	SignalManager.resized.connect(update_properties)
 	SignalManager.full_turn_completed.connect(turn_completed)
 	
-	entity_name = "Psi"
-	get_parent().set_entity_owner(self)
-	
-	update_properties()
-	
 func update_properties():
 	scale = Vector2(0.26,0.26) * get_parent().get_current_scale()[1]
 	global_position = get_parent().get_global_center() + Vector2(0,60) * get_parent().get_current_scale()[1]
+
+func set_base_stats():
+	max_hp = 100.0
+	base_atk = 10.0
+	base_block = 5.0
+	base_heal = 3.0
+	base_charge = 3
+	
+	current_hp = max_hp
 
 func turn_completed():
 	effective_atk = base_atk

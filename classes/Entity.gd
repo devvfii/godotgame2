@@ -1,5 +1,5 @@
-extends Sprite2D
 class_name Entity
+extends Sprite2D
 
 var entity_name : String
 
@@ -22,8 +22,15 @@ var charge_storage := 0
 var base_charge := 3
 var effective_charge := base_charge
 
-var sprite : AnimatedSprite2D
 var h_flip : bool
+
+func _init(display_name, texture_path):
+	setName(display_name)
+	texture = load(texture_path)
+	visible = false
+
+func setName(name : String):
+	entity_name = name
 
 func takeDamage(damage : int):
 	current_hp -= damage
@@ -50,8 +57,7 @@ func charge(value : int):
 	print("%s charged %s orbs." % [entity_name, value])
 
 func resolve_action(action : ActionInstance):
-	calculate_effective_stats(action.orb_count - 2)
-	
+	calculate_effective_stats(action.orb_count)
 	match action.instance_type:
 		0:
 			# MATTACK
@@ -66,10 +72,11 @@ func resolve_action(action : ActionInstance):
 			# HEAL
 			self.heal(effective_heal)
 
-func calculate_effective_stats(factor : int):
-	effective_atk = base_atk * factor
-	effective_block = base_block * factor
-	effective_heal = base_heal * factor
+func calculate_effective_stats(orb_count : int):
+	var factor = (orb_count - 3) * 0.1
+	effective_atk = base_atk * ( 1 + factor)
+	effective_block = base_block * ( 1 + factor)
+	effective_heal = base_heal * ( 1 + factor)
 
 func turn_completed():
 	pass

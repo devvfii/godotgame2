@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bco7lrynqaec"]
+[gd_scene load_steps=3 format=3 uid="uid://bco7lrynqaec"]
 
-[ext_resource type="Script" path="res://classes/CustomControl.gd" id="1_smmdb"]
+[ext_resource type="Script" path="res://ver0.2/PlayerBox.gd" id="1_la76l"]
 [ext_resource type="PackedScene" uid="uid://c0jlxb720ha3s" path="res://ver0.2/HealthBar.tscn" id="2_wclct"]
-[ext_resource type="Texture2D" uid="uid://b4nfcqvg866ge" path="res://tempassets/player.png" id="4_62w4s"]
-[ext_resource type="Script" path="res://classes/Player.gd" id="5_2qps4"]
 
 [node name="PlayerBox" type="Control"]
 layout_mode = 3
@@ -13,13 +11,11 @@ anchor_right = 0.335
 anchor_bottom = 0.785148
 offset_right = -0.320007
 offset_bottom = 0.039978
-script = ExtResource("1_smmdb")
+script = ExtResource("1_la76l")
 
 [node name="PlayerCharacter" type="Sprite2D" parent="."]
 position = Vector2(272.4, 414.8)
 scale = Vector2(0.26, 0.26)
-texture = ExtResource("4_62w4s")
-script = ExtResource("5_2qps4")
 
 [node name="HealthBar" parent="." instance=ExtResource("2_wclct")]
 layout_mode = 1

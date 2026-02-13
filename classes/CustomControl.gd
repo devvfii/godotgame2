@@ -1,5 +1,5 @@
-extends Control
 class_name CustomControl
+extends Control
 
 var base_size : Vector2
 var current_scale := Vector2(1,1)
@@ -10,7 +10,8 @@ var entity_owner : Entity
 func _ready():
 	SignalManager.resized.connect(update_properties)
 	SignalManager.died.connect(owner_died)
-
+	
+	update_properties()
 
 func set_entity_owner(entity : Entity):
 	entity_owner = entity
