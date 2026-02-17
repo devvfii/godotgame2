@@ -2,6 +2,7 @@ class_name Constants
 extends Node
 
 enum DIRECTION {UP, UP_RIGHT, RIGHT, DOWN_RIGHT, DOWN, DOWN_LEFT, LEFT, UP_LEFT}
+enum TURN_STATES {PLANNING, EXECUTION, RESOLUTION, ENEMY}
 
 const DIRECTION_MAP = {
 	"left" : DIRECTION.LEFT,
@@ -12,6 +13,13 @@ const DIRECTION_MAP = {
 	"down_right" : DIRECTION.DOWN_RIGHT,
 	"up" : DIRECTION.UP,
 	"down" : DIRECTION.DOWN
+}
+
+const TURN_STATES_MAP = {
+	"planning" : TURN_STATES.PLANNING,
+	"execution" : TURN_STATES.EXECUTION,
+	"resolution" : TURN_STATES.RESOLUTION,
+	"enemy" : TURN_STATES.ENEMY
 }
 
 const CHARACTERS = {

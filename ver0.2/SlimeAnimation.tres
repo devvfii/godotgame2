@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=20 format=3 uid="uid://b6lva3tlfk23s"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://b6lva3tlfk23s"]
 
 [ext_resource type="Texture2D" uid="uid://bl7hvn2ksw33w" path="res://tempassets/slime-Sheet.png" id="1_1t6vs"]
 

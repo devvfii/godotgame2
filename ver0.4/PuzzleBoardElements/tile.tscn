@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://fsl8gv4uv4bc"]
+
+[ext_resource type="Script" uid="uid://y55awy8rg4tt" path="res://ver0.4/tile.gd" id="1_5dxo7"]
+[ext_resource type="Texture2D" uid="uid://bsmkhxd8f5we5" path="res://tempassets/redOrb.png" id="2_10vgy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_10vgy"]
+radius = 25.0
+
+[node name="Tile" type="Control" unique_id=507621907]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 50.0
+offset_bottom = 50.0
+mouse_filter = 2
+script = ExtResource("1_5dxo7")
+texture = ExtResource("2_10vgy")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1092516527]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 3
+
+[node name="Center" type="Marker2D" parent="." unique_id=1186992565]
+position = Vector2(25, 25)
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=237377554]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=831350429]
+shape = SubResource("CircleShape2D_10vgy")
+
+[connection signal="resized" from="." to="." method="_on_resized"]
+[connection signal="input_event" from="Hitbox" to="." method="_on_hitbox_input_event"]
+[connection signal="mouse_entered" from="Hitbox" to="." method="_on_hitbox_mouse_entered"]
