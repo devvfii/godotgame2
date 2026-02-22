@@ -1,10 +1,10 @@
 extends TextureProgressBar
-@onready var timer = $"../TurnTimer"
+@onready var timer = $TurnTimer
 
 
 var time_passed
 var started = false
-var last_orb_selected : Orb
+var last_orb_selected : Orb_old
 
 func _ready():
 	self.visible = false

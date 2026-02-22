@@ -1,4 +1,4 @@
-class_name Orb
+class_name Orb_old
 extends Sprite2D
 
 enum TYPE {MELEE, RANGED, BLOCK, HEAL, CHARGE, JAMMER, BOMB}
@@ -76,7 +76,7 @@ func _on_hitbox_mouse_exited():
 		selectable = false
 
 func _on_hitbox_body_entered(body):
-	if selected and body.get_parent() is Orb:
+	if selected and body.get_parent() is Orb_old:
 		orb_swap(body.get_parent())
 
 func newOrb(type : int, image , initial_position : Vector2):
@@ -86,7 +86,7 @@ func newOrb(type : int, image , initial_position : Vector2):
 	position = initial_position
 	board_position = initial_position
 
-func orb_selected(orb : Orb):
+func orb_selected(orb : Orb_old):
 	if orb == self:
 		selected = true
 	else:
@@ -94,7 +94,7 @@ func orb_selected(orb : Orb):
 		if SignalManager.orb_selected.is_connected(orb_selected):
 			SignalManager.orb_selected.disconnect(orb_selected)
 
-func orb_dropped(orb : Orb):
+func orb_dropped(orb : Orb_old):
 	if orb == self:
 		selected = false
 	else:
@@ -102,7 +102,7 @@ func orb_dropped(orb : Orb):
 		if !SignalManager.orb_selected.is_connected(orb_selected):
 			SignalManager.orb_selected.connect(orb_selected)
 
-func orb_swap(orb : Orb):
+func orb_swap(orb : Orb_old):
 	var temp_position = board_position
 	board_position = orb.board_position
 	orb.board_position = temp_position
@@ -119,9 +119,3 @@ func moveTo(dest : Vector2):
 
 func queue_for_deletion():
 	deleted = true
-
-
-
-
-
-

@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://bdaietjd46xcd"]
+[gd_scene format=3 uid="uid://bdaietjd46xcd"]
 
-[ext_resource type="Script" path="res://classes/Orb.gd" id="1_h084r"]
+[ext_resource type="Script" uid="uid://bahcrlnljabci" path="res://classes/Orb.gd" id="1_h084r"]
 [ext_resource type="PackedScene" uid="uid://ryx7sbtbhixk" path="res://ver0.2/Hitbox.tscn" id="2_x87vd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_siy4a"]
@@ -8,20 +8,20 @@ radius = 30.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_desg6"]
 
-[node name="Orb" type="Sprite2D"]
+[node name="Orb" type="Sprite2D" unique_id=1793018231]
 script = ExtResource("1_h084r")
 
-[node name="Hitbox" parent="." instance=ExtResource("2_x87vd")]
+[node name="Hitbox" parent="." unique_id=753002271 instance=ExtResource("2_x87vd")]
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource("CircleShape2D_siy4a")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1147812770]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=242470398]
 shape = SubResource("CircleShape2D_siy4a")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=537569057]
 top_level = true
 texture = SubResource("CompressedTexture2D_desg6")
 

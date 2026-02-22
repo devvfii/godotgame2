@@ -23,14 +23,14 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-SignalManager="*res://classes/SignalManager.gd"
-RngManager="*res://classes/RNGManager.gd"
-GlobalConstants="*res://classes/GlobalConstants.gd"
+RngManager="*uid://crmkf4hf16p3t"
+SignalManager="*uid://wc6r8flom81c"
+GlobalConstants="*uid://dtjyyylviqrnm"
 
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=700
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 
 [editor]
 

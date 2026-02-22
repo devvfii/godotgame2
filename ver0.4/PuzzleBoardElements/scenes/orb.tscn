@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bbdxu1umn0wkb"]
+
+[ext_resource type="Script" uid="uid://bjc7v60g85xhr" path="res://ver0.4/PuzzleBoardElements/scripts/Orb.gd" id="1_na2us"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_desg6"]
+
+[node name="Orb" type="Sprite2D" unique_id=971795835]
+script = ExtResource("1_na2us")
+metadata/_custom_type_script = "uid://bjc7v60g85xhr"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=219107956]
+top_level = true
+texture = SubResource("CompressedTexture2D_desg6")

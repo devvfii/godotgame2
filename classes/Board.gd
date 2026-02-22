@@ -14,7 +14,7 @@ var node_link : Dictionary = {}
 var orb_link : Dictionary = {}
 var turn_actions : Array[ActionInstance] = []
 
-var target_orb : Orb
+var target_orb : Orb_old
 var orb_swapped : bool = false
 
 var orb_deletion_queue : Array = []
@@ -43,7 +43,7 @@ func regenerateBoard():
 			orbs.add_child(neworb)
 
 func resolveBoard():
-	var current_orb : Orb
+	var current_orb : Orb_old
 	var orb_matches : Array
 	var resolved : Array
 	var combos : Array
@@ -127,13 +127,13 @@ func clearBoard():
 			orb_link[node.position].queue_for_deletion()
 			orb_link.erase(node.position)
 	
-func orbSwap(selectedOrb : Orb, orb : Orb):
+func orbSwap(selectedOrb : Orb_old, orb : Orb_old):
 	orb_link[selectedOrb.board_position] = selectedOrb
 	orb_link[orb.board_position] = orb
 	
 	orb_swapped = true
 
-func orbDropped(orb : Orb):
+func orbDropped(orb : Orb_old):
 	orb.moveTo(orb.board_position)
 	
 	if orb_swapped:
@@ -141,7 +141,7 @@ func orbDropped(orb : Orb):
 	
 	orb_swapped = false
 	
-func checkOrbMatches(orb : Orb):
+func checkOrbMatches(orb : Orb_old):
 	var current_orb = orb
 	var match_array = [orb]
 	var count_array = []
@@ -179,7 +179,7 @@ func resolveOrbs(toResolve : Array):
 	var final_combos = []
 	var stack = []
 	stack.append_array(toResolve)
-	var current_orb : Orb
+	var current_orb : Orb_old
 	while not stack.is_empty():
 		current_orb = stack.pop_back()
 		if current_orb.resolved:
@@ -208,7 +208,7 @@ func floodFill(position : Vector2, array : Array, type : String):
 	
 	return total
 
-func wait_for_deletion_queue(orb : Orb):
+func wait_for_deletion_queue(orb : Orb_old):
 	if orb in orb_deletion_queue:
 		orb_deletion_queue.erase(orb)
 	

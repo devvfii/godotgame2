@@ -1,0 +1,522 @@
+[gd_scene format=3 uid="uid://4xerbhc0b6h"]
+
+[ext_resource type="PackedScene" uid="uid://fsl8gv4uv4bc" path="res://ver0.4/PuzzleBoardElements/scenes/tile.tscn" id="1_0ymjn"]
+[ext_resource type="Script" uid="uid://d1a7fu0qyh684" path="res://ver0.4/PuzzleBoardElements/scripts/puzzle_board.gd" id="1_qc7d5"]
+[ext_resource type="Texture2D" uid="uid://b8m04w2y6cb6h" path="res://tempassets/BoardTile-Dark.png" id="2_2t33g"]
+[ext_resource type="Texture2D" uid="uid://dxfy2wxbnpu5n" path="res://tempassets/BoardTile-Light.png" id="2_qmuns"]
+
+[node name="PuzzleBoard" type="Control" unique_id=1710562530]
+custom_minimum_size = Vector2(840, 700)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -420.0
+offset_top = -350.0
+offset_right = 420.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+script = ExtResource("1_qc7d5")
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=844131256]
+custom_minimum_size = Vector2(320, 270)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 3
+
+[node name="TopLeft" type="Control" parent="GridContainer" unique_id=1500924689]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Top" type="Control" parent="GridContainer" unique_id=359021944]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GridContainer/Top" unique_id=400768478]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Control" type="Control" parent="GridContainer/Top/HBoxContainer" unique_id=390493485]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control2" type="Control" parent="GridContainer/Top/HBoxContainer" unique_id=826279553]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control3" type="Control" parent="GridContainer/Top/HBoxContainer" unique_id=1213615263]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control4" type="Control" parent="GridContainer/Top/HBoxContainer" unique_id=1983702646]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control5" type="Control" parent="GridContainer/Top/HBoxContainer" unique_id=1150706257]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control6" type="Control" parent="GridContainer/Top/HBoxContainer" unique_id=1730324156]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TopRight" type="Control" parent="GridContainer" unique_id=1008224307]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Left" type="Control" parent="GridContainer" unique_id=438311308]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GridContainer/Left" unique_id=1753436541]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Control" type="Control" parent="GridContainer/Left/VBoxContainer" unique_id=842525023]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control2" type="Control" parent="GridContainer/Left/VBoxContainer" unique_id=2119559361]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control3" type="Control" parent="GridContainer/Left/VBoxContainer" unique_id=1715280124]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control4" type="Control" parent="GridContainer/Left/VBoxContainer" unique_id=58824035]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control5" type="Control" parent="GridContainer/Left/VBoxContainer" unique_id=82398045]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Middle" type="AspectRatioContainer" parent="GridContainer" unique_id=325314154]
+custom_minimum_size = Vector2(300, 250)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+ratio = 1.2
+stretch_mode = 0
+
+[node name="BoardTiles" type="GridContainer" parent="GridContainer/Middle" unique_id=1632069143]
+custom_minimum_size = Vector2(300, 250)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 6
+
+[node name="Tile" parent="GridContainer/Middle/BoardTiles" unique_id=507621907 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_2t33g")
+
+[node name="Tile2" parent="GridContainer/Middle/BoardTiles" unique_id=1365373136 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_qmuns")
+
+[node name="Tile3" parent="GridContainer/Middle/BoardTiles" unique_id=107699932 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_2t33g")
+
+[node name="Tile4" parent="GridContainer/Middle/BoardTiles" unique_id=629953479 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_qmuns")
+
+[node name="Tile5" parent="GridContainer/Middle/BoardTiles" unique_id=653601622 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_2t33g")
+
+[node name="Tile6" parent="GridContainer/Middle/BoardTiles" unique_id=1901286598 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_qmuns")
+
+[node name="Tile7" parent="GridContainer/Middle/BoardTiles" unique_id=234504509 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_qmuns")
+
+[node name="Tile8" parent="GridContainer/Middle/BoardTiles" unique_id=917114192 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_2t33g")
+
+[node name="Tile9" parent="GridContainer/Middle/BoardTiles" unique_id=621836612 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_qmuns")
+
+[node name="Tile10" parent="GridContainer/Middle/BoardTiles" unique_id=251608256 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_2t33g")
+
+[node name="Tile11" parent="GridContainer/Middle/BoardTiles" unique_id=1938398134 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_qmuns")
+
+[node name="Tile12" parent="GridContainer/Middle/BoardTiles" unique_id=270675034 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_2t33g")
+
+[node name="Tile13" parent="GridContainer/Middle/BoardTiles" unique_id=1214591227 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_2t33g")
+
+[node name="Tile14" parent="GridContainer/Middle/BoardTiles" unique_id=405700896 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_qmuns")
+
+[node name="Tile15" parent="GridContainer/Middle/BoardTiles" unique_id=27987760 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_2t33g")
+
+[node name="Tile16" parent="GridContainer/Middle/BoardTiles" unique_id=189221338 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_qmuns")
+
+[node name="Tile17" parent="GridContainer/Middle/BoardTiles" unique_id=118226429 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_2t33g")
+
+[node name="Tile18" parent="GridContainer/Middle/BoardTiles" unique_id=526918416 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_qmuns")
+
+[node name="Tile19" parent="GridContainer/Middle/BoardTiles" unique_id=40223694 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_qmuns")
+
+[node name="Tile20" parent="GridContainer/Middle/BoardTiles" unique_id=1157148026 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_2t33g")
+
+[node name="Tile21" parent="GridContainer/Middle/BoardTiles" unique_id=1396130804 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_qmuns")
+
+[node name="Tile22" parent="GridContainer/Middle/BoardTiles" unique_id=1599639570 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_2t33g")
+
+[node name="Tile23" parent="GridContainer/Middle/BoardTiles" unique_id=1451679076 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_qmuns")
+
+[node name="Tile24" parent="GridContainer/Middle/BoardTiles" unique_id=689092759 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_2t33g")
+
+[node name="Tile25" parent="GridContainer/Middle/BoardTiles" unique_id=1358447567 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_2t33g")
+
+[node name="Tile26" parent="GridContainer/Middle/BoardTiles" unique_id=1380981761 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_qmuns")
+
+[node name="Tile27" parent="GridContainer/Middle/BoardTiles" unique_id=793436517 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_2t33g")
+
+[node name="Tile28" parent="GridContainer/Middle/BoardTiles" unique_id=414131432 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_qmuns")
+
+[node name="Tile29" parent="GridContainer/Middle/BoardTiles" unique_id=328604666 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_2t33g")
+
+[node name="Tile30" parent="GridContainer/Middle/BoardTiles" unique_id=1378647266 instance=ExtResource("1_0ymjn")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+texture = ExtResource("2_qmuns")
+
+[node name="OrbContainer" type="Node" parent="GridContainer/Middle" unique_id=146990153]
+unique_name_in_owner = true
+
+[node name="Right" type="Control" parent="GridContainer" unique_id=2131355033]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GridContainer/Right" unique_id=2136135174]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Control" type="Control" parent="GridContainer/Right/VBoxContainer" unique_id=2108948329]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control2" type="Control" parent="GridContainer/Right/VBoxContainer" unique_id=1207364112]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control3" type="Control" parent="GridContainer/Right/VBoxContainer" unique_id=337221023]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control4" type="Control" parent="GridContainer/Right/VBoxContainer" unique_id=1264563813]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control5" type="Control" parent="GridContainer/Right/VBoxContainer" unique_id=478087767]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BottomLeft" type="Control" parent="GridContainer" unique_id=1498486467]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Bottom" type="Control" parent="GridContainer" unique_id=971466880]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GridContainer/Bottom" unique_id=1879318859]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Control" type="Control" parent="GridContainer/Bottom/HBoxContainer" unique_id=561934830]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control2" type="Control" parent="GridContainer/Bottom/HBoxContainer" unique_id=1770019610]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control3" type="Control" parent="GridContainer/Bottom/HBoxContainer" unique_id=68451180]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control4" type="Control" parent="GridContainer/Bottom/HBoxContainer" unique_id=1294098000]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control5" type="Control" parent="GridContainer/Bottom/HBoxContainer" unique_id=585860033]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control6" type="Control" parent="GridContainer/Bottom/HBoxContainer" unique_id=1241414939]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BottomRight" type="Control" parent="GridContainer" unique_id=525667135]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Button" type="Button" parent="." unique_id=1809767287]
+layout_mode = 0
+offset_left = -130.0
+offset_top = -23.0
+offset_right = -36.0
+offset_bottom = 8.0
+text = "regenerate"
+
+[node name="Button2" type="Button" parent="." unique_id=1719501442]
+layout_mode = 0
+offset_left = -130.0
+offset_top = 22.0
+offset_right = -36.0
+offset_bottom = 53.0
+text = "resolve"
+
+[node name="Label" type="Label" parent="." unique_id=1784432183]
+layout_mode = 0
+offset_left = -130.0
+offset_top = -64.0
+offset_right = -90.0
+offset_bottom = -41.0
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="resized" from="GridContainer/Middle/BoardTiles/Tile" to="." method="_on_tile_resized"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

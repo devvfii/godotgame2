@@ -1,14 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://drxrnbsfe76jg"]
+[gd_scene format=3 uid="uid://drxrnbsfe76jg"]
 
-[ext_resource type="Script" path="res://ver0.2/BattleData.gd" id="1_pnd1l"]
+[ext_resource type="Script" uid="uid://uybyoafg4i3a" path="res://ver0.2/BattleData.gd" id="1_pnd1l"]
 [ext_resource type="PackedScene" uid="uid://bco7lrynqaec" path="res://ver0.2/PlayerBox.tscn" id="1_yflnu"]
 [ext_resource type="PackedScene" uid="uid://bv8au5uh8ovhq" path="res://ver0.2/EnemyBox.tscn" id="2_iqp48"]
 [ext_resource type="PackedScene" uid="uid://33ottkxvkw3j" path="res://ver0.2/ActionBoard.tscn" id="3_i77sq"]
-[ext_resource type="Script" path="res://classes/TurnManager.gd" id="4_abpxr"]
-[ext_resource type="Script" path="res://ver0.2/DebugButtons.gd" id="5_pw45w"]
+[ext_resource type="Script" uid="uid://ciivfaow4guw" path="res://ver0.4/Common/scripts/TurnManager.gd" id="4_abpxr"]
+[ext_resource type="Script" uid="uid://bui5uqlujeyse" path="res://ver0.2/DebugButtons.gd" id="5_pw45w"]
 [ext_resource type="Texture2D" uid="uid://bd1dpdbqx5cmw" path="res://tempassets/hp_bar.png" id="6_2e45a"]
 [ext_resource type="Texture2D" uid="uid://c5hfc0vs5ksii" path="res://tempassets/hp_bar_bg.png" id="7_cisop"]
-[ext_resource type="Script" path="res://ver0.2/TurnTimerTexture.gd" id="8_dvlvy"]
+[ext_resource type="Script" uid="uid://7nh1oi4n4kee" path="res://ver0.2/TurnTimerTexture.gd" id="8_dvlvy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4at17"]
 atlas = ExtResource("6_2e45a")
@@ -18,7 +18,7 @@ region = Rect2(0, 0, 164, 10)
 atlas = ExtResource("7_cisop")
 region = Rect2(0, 0, 164, 10)
 
-[node name="Battle" type="Control"]
+[node name="Battle" type="Control" unique_id=157639625]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,15 +28,15 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_pnd1l")
 
-[node name="PlayerBox" parent="." instance=ExtResource("1_yflnu")]
+[node name="PlayerBox" parent="." unique_id=125047060 instance=ExtResource("1_yflnu")]
 layout_mode = 1
 mouse_filter = 2
 
-[node name="EnemyBox" parent="." instance=ExtResource("2_iqp48")]
+[node name="EnemyBox" parent="." unique_id=1321908782 instance=ExtResource("2_iqp48")]
 layout_mode = 1
 mouse_filter = 2
 
-[node name="Relics" type="VBoxContainer" parent="."]
+[node name="Relics" type="VBoxContainer" parent="." unique_id=2137137643]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 1
 anchors_preset = -1
@@ -45,15 +45,15 @@ anchor_bottom = 0.8
 offset_right = 100.0
 mouse_filter = 2
 
-[node name="ColorRect" type="ColorRect" parent="Relics"]
+[node name="ColorRect" type="ColorRect" parent="Relics" unique_id=1170864446]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 
-[node name="ColorRect2" type="ColorRect" parent="Relics"]
+[node name="ColorRect2" type="ColorRect" parent="Relics" unique_id=2051139459]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 
-[node name="BattleElements" type="Control" parent="."]
+[node name="BattleElements" type="Control" parent="." unique_id=43400404]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -64,7 +64,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="Board" type="Control" parent="BattleElements"]
+[node name="Board" type="Control" parent="BattleElements" unique_id=1391014604]
 custom_minimum_size = Vector2(600, 500)
 layout_mode = 1
 anchors_preset = 8
@@ -80,17 +80,13 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="ActionBoard" parent="BattleElements/Board" instance=ExtResource("3_i77sq")]
+[node name="ActionBoard" parent="BattleElements/Board" unique_id=1641057070 instance=ExtResource("3_i77sq")]
 position = Vector2(302, 250)
 
-[node name="TurnManager" type="Node2D" parent="BattleElements/Board"]
+[node name="TurnManager" type="Node2D" parent="BattleElements/Board" unique_id=344612175]
 script = ExtResource("4_abpxr")
 
-[node name="TurnTimer" type="Timer" parent="BattleElements/Board"]
-wait_time = 10.0
-one_shot = true
-
-[node name="TurnTimerTexture" type="TextureProgressBar" parent="BattleElements/Board"]
+[node name="TurnTimerTexture" type="TextureProgressBar" parent="BattleElements/Board" unique_id=1349839597]
 z_index = 5
 layout_mode = 0
 offset_top = -30.0
@@ -100,7 +96,11 @@ texture_under = SubResource("AtlasTexture_4at17")
 texture_progress = SubResource("AtlasTexture_ot0cx")
 script = ExtResource("8_dvlvy")
 
-[node name="ActionBar" type="Control" parent="BattleElements"]
+[node name="TurnTimer" type="Timer" parent="BattleElements/Board/TurnTimerTexture" unique_id=1272040252]
+wait_time = 10.0
+one_shot = true
+
+[node name="ActionBar" type="Control" parent="BattleElements" unique_id=326274463]
 layout_mode = 1
 anchor_top = 0.8
 anchor_right = 1.0
@@ -109,7 +109,7 @@ grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
 
-[node name="Skills" type="HBoxContainer" parent="BattleElements/ActionBar"]
+[node name="Skills" type="HBoxContainer" parent="BattleElements/ActionBar" unique_id=411460878]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.2
@@ -120,23 +120,23 @@ grow_vertical = 0
 mouse_filter = 2
 alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="BattleElements/ActionBar/Skills"]
+[node name="ColorRect" type="ColorRect" parent="BattleElements/ActionBar/Skills" unique_id=2003689823]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
-[node name="ColorRect2" type="ColorRect" parent="BattleElements/ActionBar/Skills"]
+[node name="ColorRect2" type="ColorRect" parent="BattleElements/ActionBar/Skills" unique_id=520367368]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
-[node name="ColorRect3" type="ColorRect" parent="BattleElements/ActionBar/Skills"]
+[node name="ColorRect3" type="ColorRect" parent="BattleElements/ActionBar/Skills" unique_id=1703522611]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
-[node name="ColorRect4" type="ColorRect" parent="BattleElements/ActionBar/Skills"]
+[node name="ColorRect4" type="ColorRect" parent="BattleElements/ActionBar/Skills" unique_id=1600639987]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
-[node name="DebugButtons" type="Control" parent="."]
+[node name="DebugButtons" type="Control" parent="." unique_id=1593336563]
 z_index = 5
 anchors_preset = 0
 offset_right = 40.0
@@ -144,7 +144,7 @@ offset_bottom = 40.0
 mouse_filter = 2
 script = ExtResource("5_pw45w")
 
-[node name="Button" type="Button" parent="DebugButtons"]
+[node name="Button" type="Button" parent="DebugButtons" unique_id=1802286446]
 layout_mode = 0
 offset_left = 1695.0
 offset_top = 90.0
@@ -152,7 +152,7 @@ offset_right = 1892.0
 offset_bottom = 152.0
 text = "Take 10 damage"
 
-[node name="Button2" type="Button" parent="DebugButtons"]
+[node name="Button2" type="Button" parent="DebugButtons" unique_id=1912154281]
 layout_mode = 0
 offset_left = 1695.0
 offset_top = 169.0
@@ -160,7 +160,7 @@ offset_right = 1892.0
 offset_bottom = 231.0
 text = "Deal 10 damage"
 
-[node name="Button3" type="Button" parent="DebugButtons"]
+[node name="Button3" type="Button" parent="DebugButtons" unique_id=1961707354]
 layout_mode = 0
 offset_left = 1433.0
 offset_top = 90.0
@@ -168,7 +168,7 @@ offset_right = 1581.0
 offset_bottom = 121.0
 text = "Regenerate Board"
 
-[node name="Button4" type="Button" parent="DebugButtons"]
+[node name="Button4" type="Button" parent="DebugButtons" unique_id=255722290]
 layout_mode = 0
 offset_left = 1433.0
 offset_top = 152.0
@@ -176,7 +176,7 @@ offset_right = 1551.0
 offset_bottom = 183.0
 text = "Resolve Board"
 
-[node name="Button5" type="Button" parent="DebugButtons"]
+[node name="Button5" type="Button" parent="DebugButtons" unique_id=245476167]
 layout_mode = 0
 offset_left = 1433.0
 offset_top = 212.0
@@ -184,7 +184,7 @@ offset_right = 1532.0
 offset_bottom = 243.0
 text = "Clear Board"
 
-[node name="Button7" type="Button" parent="DebugButtons"]
+[node name="Button7" type="Button" parent="DebugButtons" unique_id=228804874]
 layout_mode = 0
 offset_left = 1433.0
 offset_top = 278.0
@@ -192,7 +192,7 @@ offset_right = 1578.0
 offset_bottom = 309.0
 text = "Roll Enemy Intent"
 
-[node name="Button8" type="Button" parent="DebugButtons"]
+[node name="Button8" type="Button" parent="DebugButtons" unique_id=186495386]
 layout_mode = 0
 offset_left = 1600.0
 offset_top = 278.0
@@ -200,7 +200,7 @@ offset_right = 1745.0
 offset_bottom = 309.0
 text = "Debug Breakpoint"
 
-[node name="Label" type="Label" parent="DebugButtons"]
+[node name="Label" type="Label" parent="DebugButtons" unique_id=1732529229]
 layout_mode = 0
 offset_left = 133.0
 offset_top = 90.0
@@ -208,14 +208,14 @@ offset_right = 195.0
 offset_bottom = 113.0
 text = "Actions:"
 
-[node name="Label2" type="Label" parent="DebugButtons"]
+[node name="Label2" type="Label" parent="DebugButtons" unique_id=2054757596]
 layout_mode = 0
 offset_left = 156.0
 offset_top = 131.0
 offset_right = 196.0
 offset_bottom = 154.0
 
-[node name="Label3" type="Label" parent="DebugButtons"]
+[node name="Label3" type="Label" parent="DebugButtons" unique_id=1784687795]
 layout_mode = 0
 offset_left = 339.0
 offset_top = 40.0
@@ -223,7 +223,7 @@ offset_right = 379.0
 offset_bottom = 63.0
 text = "Turn"
 
-[node name="Label4" type="Label" parent="DebugButtons"]
+[node name="Label4" type="Label" parent="DebugButtons" unique_id=1319589370]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 927.0
@@ -231,14 +231,14 @@ offset_right = 80.0
 offset_bottom = 950.0
 text = "Charge Stored:"
 
-[node name="Label5" type="Label" parent="DebugButtons"]
+[node name="Label5" type="Label" parent="DebugButtons" unique_id=373234651]
 layout_mode = 0
 offset_left = 160.0
 offset_top = 927.0
 offset_right = 200.0
 offset_bottom = 950.0
 
-[node name="Label6" type="Label" parent="DebugButtons"]
+[node name="Label6" type="Label" parent="DebugButtons" unique_id=1887162422]
 layout_mode = 0
 offset_left = 1791.0
 offset_top = 340.0
@@ -246,7 +246,7 @@ offset_right = 1849.0
 offset_bottom = 363.0
 text = "INTENT"
 
-[connection signal="timeout" from="BattleElements/Board/TurnTimer" to="BattleElements/Board/TurnTimerTexture" method="_on_turn_timer_timeout"]
+[connection signal="timeout" from="BattleElements/Board/TurnTimerTexture/TurnTimer" to="BattleElements/Board/TurnTimerTexture" method="_on_turn_timer_timeout"]
 [connection signal="pressed" from="DebugButtons/Button" to="DebugButtons" method="_on_button_pressed"]
 [connection signal="resized" from="DebugButtons/Button" to="PlayerBox" method="_on_button_resized"]
 [connection signal="pressed" from="DebugButtons/Button2" to="DebugButtons" method="_on_button_2_pressed"]
