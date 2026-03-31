@@ -1,4 +1,4 @@
-class_name Entity
+class_name Entity_old
 extends Sprite2D
 
 var entity_name : String

@@ -1,6 +1,6 @@
 extends TextureProgressBar
-@onready var timer = $TurnTimer
 
+@onready var timer = $Timer
 
 var time_passed
 var started = false
@@ -27,12 +27,6 @@ func _on_turn_state_changed(state):
 		started = true
 		timer.start()
 		visible = true
-	
-func _on_turn_timer_timeout():
-	value = 0
-	visible = false
-	started = false
-	SignalManager.orb_dropped.emit(last_orb_selected)
 
 func _on_orb_selected(orb):
 	if not started:
@@ -43,4 +37,10 @@ func _on_orb_dropped(_orb):
 	value = 0
 	visible = false
 	started = false
-	
+
+func _on_timer_timeout():
+	value = 0
+	visible = false
+	started = false
+	SignalManager.turn_state_changed.emit(GlobalConstants.TURN_STATES.RESOLUTION)
+	SignalManager.orb_dropped.emit(last_orb_selected)

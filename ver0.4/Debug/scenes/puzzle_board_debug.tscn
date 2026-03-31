@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://bm3h1loh5ehyw"]
+
+[ext_resource type="Script" uid="uid://dkk3tm2mpu27c" path="res://ver0.4/Debug/scripts/puzzle_board_debug.gd" id="1_eanyt"]
+
+[node name="PuzzleBoardDebug" type="Control" unique_id=1482904150]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 86.0
+offset_right = 4.0
+offset_bottom = 86.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_eanyt")
+
+[node name="RegenerateBoard" type="Button" parent="." unique_id=75399581]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 117.0
+offset_right = 119.0
+offset_bottom = 148.0
+text = "regenerate_board"
+
+[node name="ResolveBoard" type="Button" parent="." unique_id=2129984812]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 190.0
+offset_right = 119.0
+offset_bottom = 221.0
+text = "resolve_board"
+
+[node name="ClearBoard" type="Button" parent="." unique_id=640137650]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 267.0
+offset_right = 119.0
+offset_bottom = 298.0
+text = "clear_board"
+
+[node name="TurnState" type="Label" parent="." unique_id=1048117088]
+layout_mode = 0
+offset_left = 142.0
+offset_top = 48.0
+offset_right = 184.0
+offset_bottom = 97.0
+text = "Label
+"
+
+[node name="Combos" type="Label" parent="." unique_id=722596508]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 376.0
+offset_right = 563.0
+offset_bottom = 939.0
+autowrap_mode = 2
+
+[node name="Actions" type="Label" parent="." unique_id=350110667]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 341.0
+offset_right = 130.0
+offset_bottom = 390.0
+text = "Actions:
+"
+
+[node name="CurrentTurn" type="Label" parent="." unique_id=1340237814]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 48.0
+offset_right = 67.0
+offset_bottom = 97.0
+text = "Current Turn:
+"
+
+[connection signal="pressed" from="RegenerateBoard" to="." method="_on_regenerate_board_pressed"]
+[connection signal="pressed" from="ResolveBoard" to="." method="_on_resolve_board_pressed"]
+[connection signal="pressed" from="ClearBoard" to="." method="_on_clear_board_pressed"]

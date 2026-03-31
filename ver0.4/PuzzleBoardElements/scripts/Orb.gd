@@ -6,7 +6,7 @@ enum COLOR {YELLOW, GREEN, BLUE, PINK, RED, STAR, BOMB}
 
 @onready var sprite = $Sprite2D
 
-var orb_asset_paths = {
+var orb_asset_paths : Dictionary = {
 	COLOR.YELLOW : "res://tempassets/yellowOrb.png",
 	COLOR.GREEN : "res://tempassets/greenOrb.png",
 	COLOR.BLUE : "res://tempassets/blueOrb.png",
@@ -31,16 +31,15 @@ const MOUSE_FOLLOW_SPEED = 10.0
 const SWAP_SPEED = 1250.0
 const TRANSPARENCY_SPEED = 2.0
 
-func _ready():
-	SignalManager.orb_selected.connect(orb_selected)
-	SignalManager.orb_resized.connect(orb_resized)
+func _ready() -> void:
+	SignalManager.orb_resized.connect(resize_orb)
 	
 	sprite.texture = load(orb_asset_paths[COLOR.get(orb_color)])
 	sprite.position = global_position + Vector2(0,-550)
 	sprite.self_modulate.a = 0.0
 	spawned = true
 
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	if sprite.position.y < 0:
 		sprite.visible = false
 	else:
@@ -50,7 +49,7 @@ func _physics_process(delta):
 		sprite.self_modulate.a = move_toward(sprite.self_modulate.a, 1.0, delta * TRANSPARENCY_SPEED)
 		if sprite.self_modulate.a == 1.0:
 			spawned = false
-
+	
 	if selected:
 		global_position = get_global_mouse_position()
 		sprite.global_position = get_global_mouse_position()
@@ -61,31 +60,34 @@ func _physics_process(delta):
 		sprite.self_modulate.a = move_toward(sprite.self_modulate.a, 0.0, delta * TRANSPARENCY_SPEED)
 		if sprite.self_modulate.a == 0.0:
 			SignalManager.orb_deleted.emit(self)
-			self.queue_free()
+			queue_free()
 
-func newOrb(type : int, parent_tile : OrbTile):
+func new_orb(type : int, tile : OrbTile) -> void:
 	orb_type = TYPE.find_key(type)
 	orb_color = COLOR.find_key(type)
-	self.parent_tile = parent_tile
+	parent_tile = tile
 	global_position = parent_tile.center_global_position
 
-func orb_selected(orb : Orb):
-	selected = orb == self
-
-func orb_dropped():
+func drop_orb() -> void:
+	sprite.z_index = 0
 	selected = false
-	snapTo(parent_tile.center_global_position)
+	snap_to(parent_tile.center_global_position)
 
-func orb_resized(tile_size : float):
-	var new_scale = tile_size / sprite.texture.get_size().x
+func move_to(dest : Vector2) -> void:
+	position = dest
+
+func queue_for_deletion() -> void:
+	deleted = true
+
+func resize_orb(tile_size : float) -> void:
+	global_position = parent_tile.center_global_position
+	var new_scale : float = tile_size / sprite.texture.get_size().x
 	sprite.scale = Vector2(new_scale, new_scale)
 
-func moveTo(dest : Vector2):
-	position = dest
+func select_orb() -> void:
+	sprite.z_index = 5
+	selected = true
 
-func snapTo(dest : Vector2):
+func snap_to(dest : Vector2) -> void:
 	position = dest
 	sprite.position = dest
-
-func queue_for_deletion():
-	deleted = true

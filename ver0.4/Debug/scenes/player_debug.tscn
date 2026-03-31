@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bccx7i3b1b4un"]
+
+[ext_resource type="Script" uid="uid://cevqps510hyso" path="res://ver0.4/Debug/scripts/player_debug.gd" id="1_ebygp"]
+
+[node name="PlayerDebug" type="Control" unique_id=1123678943]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ebygp")
+metadata/_tab_index = 1
+
+[node name="GetPlayerReference" type="Button" parent="." unique_id=1102798579]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 42.0
+offset_right = 237.0
+offset_bottom = 73.0
+text = "Get Player Reference"
+
+[node name="PlayerReference" type="Label" parent="." unique_id=923310010]
+layout_mode = 0
+offset_left = 304.0
+offset_top = 42.0
+offset_right = 344.0
+offset_bottom = 65.0
+
+[connection signal="pressed" from="GetPlayerReference" to="." method="_on_get_player_reference_pressed"]

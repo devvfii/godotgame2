@@ -4,7 +4,7 @@ extends Control
 @onready var orb_container = %OrbContainer
 
 var selected_orb : Orb
-var turn_state := GlobalConstants.TURN_STATES.PLANNING
+var turn_state : GlobalConstants.TURN_STATES
 
 var board_width : int = 6
 var board_height : int = 5
@@ -13,14 +13,17 @@ var all_tiles : Array[Node]
 var orb_deletion_queue : Array[Orb]
 
 func _ready():
-	$Label.text = GlobalConstants.TURN_STATES.keys()[turn_state]
+	SignalManager.turn_state_changed.connect(_on_turn_state_changed)
 	
-	SignalManager.state_changed.connect(_on_turn_state_change)
+	SignalManager.clear_board.connect(clear_board)
+	SignalManager.resolve_board.connect(resolve_board)
+	SignalManager.regenerate_board.connect(regenerate_board)
+	
 	SignalManager.orb_selected.connect(_on_orb_selected)
 	SignalManager.orb_dropped.connect(_on_orb_dropped)
 	SignalManager.orb_deleted.connect(wait_for_deletion_queue)
 	
-	# set up board
+	# set up tile neighbors
 	all_tiles = board_tiles.get_children()
 	for x in range(board_width):
 		for y in range(board_height):
@@ -41,28 +44,40 @@ func _ready():
 			var right_index = current_index + 1
 			if right_index < board_width * board_height and int(right_index / board_width) == int(current_index / board_width):
 				all_tiles[current_index].right = all_tiles[right_index]
+	
+	SignalManager.turn_state_changed.emit(GlobalConstants.TURN_STATES.PLANNING)
+
+func _unhandled_input(event):
+	if event.is_action_released("click"):
+		if selected_orb:
+			match turn_state:
+				GlobalConstants.TURN_STATES.EXECUTION:
+					SignalManager.orb_dropped.emit(selected_orb)
+					SignalManager.turn_state_changed.emit(GlobalConstants.TURN_STATES.RESOLUTION)
+				_:
+					SignalManager.orb_dropped.emit(selected_orb)
 
 func apply_skyfall():
-	var reverse_board_tiles = all_tiles.duplicate()
+	var reverse_board_tiles : Array[Node] = all_tiles.duplicate()
 	reverse_board_tiles.reverse()
 	for tile in reverse_board_tiles:
 		if tile.orb and tile.down and not tile.down.orb:
-			var next_tile = tile.down
+			var next_tile : OrbTile = tile.down
 			while next_tile.down and not next_tile.down.orb:
 				next_tile = next_tile.down
 			next_tile.orb = tile.orb
 			next_tile.orb.parent_tile = next_tile
-			next_tile.orb.moveTo(next_tile.center_global_position)
+			next_tile.orb.move_to(next_tile.center_global_position)
 			tile.orb = null
 
-func check_orb_matches(base_tile : OrbTile):
-	var base_orb = base_tile.orb
-	var orb_type = base_orb.orb_type
-	var match_array = [base_orb]
+func check_orb_matches(base_tile : OrbTile) -> Array[Orb]:
+	var base_orb : Orb = base_tile.orb
+	var orb_type : String = base_orb.orb_type
+	var match_array : Array[Orb] = [base_orb]
 
 	# right
-	var current_tile = base_tile
-	var count_array = []
+	var current_tile : OrbTile = base_tile
+	var count_array : Array[Orb] = []
 	while current_tile.right and current_tile.right.orb:
 		current_tile = current_tile.right
 		if current_tile.orb.orb_type == orb_type:
@@ -89,59 +104,59 @@ func check_orb_matches(base_tile : OrbTile):
 
 	return match_array
 
-func clearBoard():
+func clear_board():
 	for tile in all_tiles:
 		if tile.orb:
 			orb_deletion_queue.append(tile.orb)
 			tile.orb.queue_for_deletion()
 			tile.orb = null
 
-func flood_fill(parent_tile : OrbTile, array : Array, type : String) -> void:
-	if not parent_tile or not parent_tile.orb or parent_tile.orb.resolved:
+func flood_fill(current_tile : OrbTile, array : Array, type : String) -> void:
+	if not current_tile or not current_tile.orb or current_tile.orb.resolved:
 		return
 	
-	if parent_tile.orb.orb_type == type and parent_tile.orb in array:
-		parent_tile.orb.resolved = true
-		orb_deletion_queue.append(parent_tile.orb)
-		flood_fill(parent_tile.up, array, type)
-		flood_fill(parent_tile.left, array, type)
-		flood_fill(parent_tile.down, array, type)
-		flood_fill(parent_tile.right, array, type)
+	if current_tile.orb.orb_type == type and current_tile.orb in array:
+		current_tile.orb.resolved = true
+		orb_deletion_queue.append(current_tile.orb)
+		flood_fill(current_tile.up, array, type)
+		flood_fill(current_tile.left, array, type)
+		flood_fill(current_tile.down, array, type)
+		flood_fill(current_tile.right, array, type)
 
-func resolve_board() -> Array:
-	var current_orb : Orb
-	var orb_matches : Array
-	var resolved : Array
+func resolve_board() -> void:
+	var orb_matches : Array[Orb]
+	var resolve : Array[Orb]
 	var combos : Array
 	
 	while true:
 		for tile in all_tiles:
-			if tile.orb and tile.orb not in resolved:
+			if tile.orb and tile.orb not in resolve:
 				orb_matches = check_orb_matches(tile)
 				
 				if orb_matches.is_empty():
 					continue
 				
 				for orb in orb_matches:
-					if not resolved.has(orb):
-						resolved.append(orb)
+					if not resolve.has(orb):
+						resolve.append(orb)
 		
-		if resolved.is_empty():
+		if resolve.is_empty():
 			break
 		
-		var resolved_sets = await resolve_orbs(resolved)
+		var resolved_sets = await resolve_orbs(resolve)
 		
-		combos.append(resolved_sets)
+		combos.append(resolved_sets.duplicate())
 		
 		apply_skyfall()
 		
 		resolved_sets.clear()
-		resolved.clear()
+		resolve.clear()
 	
-	return combos
+	SignalManager.debug_log.emit(str(combos))
+	SignalManager.board_resolved.emit(combos)
 
 func resolve_orbs(to_resolve : Array):
-	var final_combos = []
+	var final_combos : Array = []
 	
 	# also should handle maybe special shape detection here
 	# for now, combos are just type and size, maybe add that special shapes later
@@ -150,7 +165,7 @@ func resolve_orbs(to_resolve : Array):
 		if tile.orb and tile.orb in to_resolve and not tile.orb.resolved:
 			flood_fill(tile, to_resolve, tile.orb.orb_type)
 			final_combos.append([tile.orb.orb_type,orb_deletion_queue.size()])
-			
+
 			for orb in orb_deletion_queue:
 				orb.queue_for_deletion()
 				orb.parent_tile.orb = null
@@ -169,33 +184,17 @@ func wait_for_deletion_queue(orb : Orb):
 	if orb_deletion_queue.is_empty():
 		SignalManager.all_orbs_resolved.emit()
 
-func _on_turn_state_change(state : GlobalConstants.TURN_STATES) -> void:
-	turn_state = state
-	$Label.text = GlobalConstants.TURN_STATES.keys()[state]
-
-func _on_orb_selected(selected_orb : Orb):
-	self.selected_orb = selected_orb
-
-func _on_orb_dropped(_orb_dropped : Orb):
-	selected_orb.orb_dropped()
+func _on_orb_dropped(_orb : Orb):
+	selected_orb.drop_orb()
 	selected_orb = null
 
-func _on_button_pressed():
-	regenerate_board()
-	
+func _on_orb_selected(orb : Orb):
+	orb.select_orb()
+	selected_orb = orb
+
 func _on_tile_resized():
 	if is_instance_valid(board_tiles):
 		SignalManager.orb_resized.emit(board_tiles.get_child(0).size.x)
 
-func _on_gui_input(event):
-	if event.is_action_released("click"):
-		if selected_orb:
-			match turn_state:
-				GlobalConstants.TURN_STATES.EXECUTION:
-					SignalManager.orb_dropped.emit(selected_orb)
-					SignalManager.state_changed.emit(GlobalConstants.TURN_STATES.PLANNING)
-				_:
-					SignalManager.orb_dropped.emit(selected_orb)
-
-func _on_button_2_pressed():
-	resolve_board()
+func _on_turn_state_changed(state : GlobalConstants.TURN_STATES) -> void:
+	turn_state = state

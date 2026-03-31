@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://cbm12ycr1ceb3"]
+
+[ext_resource type="Script" uid="uid://balo5fnmu1gr3" path="res://ver0.4/EnemyModule/scripts/enemy_module.gd" id="1_qpmt1"]
+[ext_resource type="Script" uid="uid://duh42duqpgl28" path="res://ver0.4/Common/classes/MarkerNode2D.gd" id="2_lsmyy"]
+[ext_resource type="Script" uid="uid://ctobiuexw0hye" path="res://ver0.4/EnemyModule/scripts/Enemy.gd" id="3_e6ib0"]
+[ext_resource type="Script" uid="uid://dslrrjimgy2gw" path="res://ver0.4/Common/resources/EntityData.gd" id="4_x8tm6"]
+[ext_resource type="Texture2D" uid="uid://5kaqebiabwy1" path="res://tempassets/enemy.png" id="5_2exk6"]
+
+[sub_resource type="Resource" id="Resource_4fevg"]
+script = ExtResource("4_x8tm6")
+display_name = "SlimeBoss"
+texture = ExtResource("5_2exk6")
+max_hp = 150.0
+base_atk = 30.0
+metadata/_custom_type_script = "uid://dslrrjimgy2gw"
+
+[node name="EnemyModule" type="Control" unique_id=1863151605]
+layout_mode = 3
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_qpmt1")
+
+[node name="Markers" type="Node2D" parent="." unique_id=1529571188]
+position = Vector2(-960, 0)
+
+[node name="TopLeft" type="Marker2D" parent="Markers" unique_id=1149616127 node_paths=PackedStringArray("right", "down")]
+position = Vector2(1545, 400)
+script = ExtResource("2_lsmyy")
+right = NodePath("../TopCenter")
+down = NodePath("../Left")
+metadata/_custom_type_script = "uid://duh42duqpgl28"
+
+[node name="TopCenter" type="Marker2D" parent="Markers" unique_id=296369479 node_paths=PackedStringArray("left", "right", "down")]
+position = Vector2(1670, 400)
+script = ExtResource("2_lsmyy")
+left = NodePath("../TopLeft")
+right = NodePath("../TopRight")
+down = NodePath("../Center")
+metadata/_custom_type_script = "uid://duh42duqpgl28"
+
+[node name="TopRight" type="Marker2D" parent="Markers" unique_id=516717923 node_paths=PackedStringArray("left", "down")]
+position = Vector2(1795, 400)
+script = ExtResource("2_lsmyy")
+left = NodePath("../TopCenter")
+down = NodePath("../Right")
+metadata/_custom_type_script = "uid://duh42duqpgl28"
+
+[node name="Left" type="Marker2D" parent="Markers" unique_id=1805330106 node_paths=PackedStringArray("up", "right", "down")]
+position = Vector2(1545, 500)
+script = ExtResource("2_lsmyy")
+up = NodePath("../TopLeft")
+right = NodePath("../Center")
+down = NodePath("../BottomLeft")
+metadata/_custom_type_script = "uid://duh42duqpgl28"
+
+[node name="Center" type="Marker2D" parent="Markers" unique_id=802020634 node_paths=PackedStringArray("left", "up", "right", "down")]
+position = Vector2(1670, 500)
+script = ExtResource("2_lsmyy")
+left = NodePath("../Left")
+up = NodePath("../TopCenter")
+right = NodePath("../Right")
+down = NodePath("../BottomCenter")
+metadata/_custom_type_script = "uid://duh42duqpgl28"
+
+[node name="Right" type="Marker2D" parent="Markers" unique_id=621207485 node_paths=PackedStringArray("left", "up", "down")]
+position = Vector2(1795, 500)
+script = ExtResource("2_lsmyy")
+left = NodePath("../Center")
+up = NodePath("../TopRight")
+down = NodePath("../BottomRight")
+metadata/_custom_type_script = "uid://duh42duqpgl28"
+
+[node name="BottomLeft" type="Marker2D" parent="Markers" unique_id=1300363612 node_paths=PackedStringArray("up", "right")]
+position = Vector2(1545, 600)
+script = ExtResource("2_lsmyy")
+up = NodePath("../Left")
+right = NodePath("../BottomCenter")
+metadata/_custom_type_script = "uid://duh42duqpgl28"
+
+[node name="BottomCenter" type="Marker2D" parent="Markers" unique_id=968673199 node_paths=PackedStringArray("left", "up", "right")]
+position = Vector2(1670, 600)
+script = ExtResource("2_lsmyy")
+left = NodePath("../BottomLeft")
+up = NodePath("../Center")
+right = NodePath("../BottomRight")
+metadata/_custom_type_script = "uid://duh42duqpgl28"
+
+[node name="BottomRight" type="Marker2D" parent="Markers" unique_id=1579283110 node_paths=PackedStringArray("left", "up")]
+position = Vector2(1795, 600)
+script = ExtResource("2_lsmyy")
+left = NodePath("../BottomCenter")
+up = NodePath("../Right")
+metadata/_custom_type_script = "uid://duh42duqpgl28"
+
+[node name="DebugEnemy" type="Sprite2D" parent="." unique_id=194813239]
+position = Vector2(-960, 0)
+script = ExtResource("3_e6ib0")
+entity_data = SubResource("Resource_4fevg")
+metadata/_custom_type_script = "uid://ctobiuexw0hye"
+
+[node name="Enemies" type="Node" parent="." unique_id=1701651188]

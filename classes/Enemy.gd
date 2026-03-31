@@ -1,5 +1,5 @@
 class_name Enemy
-extends Entity
+extends Entity_old
 
 var action_roll : int
 var attacks : Array[String]

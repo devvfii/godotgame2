@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EntityData" format=3 uid="uid://m7h7kjhcoclh"]
+
+[ext_resource type="Script" uid="uid://dslrrjimgy2gw" path="res://ver0.4/Common/resources/EntityData.gd" id="1_826u3"]
+[ext_resource type="Texture2D" uid="uid://b4nfcqvg866ge" path="res://tempassets/player.png" id="2_8em2e"]
+
+[resource]
+script = ExtResource("1_826u3")
+display_name = "Psi"
+texture = ExtResource("2_8em2e")
+max_hp = 100.0
+base_atk = 5.0
+base_block = 5.0
+base_heal = 3.0
+base_charge = 3.0
+metadata/_custom_type_script = "uid://dslrrjimgy2gw"

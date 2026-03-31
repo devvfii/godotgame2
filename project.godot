@@ -17,7 +17,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 config/name="StSPaDClone"
 config/description="game attempt 3"
 config/version="0"
-run/main_scene="res://ver0.2/Window.tscn"
+run/main_scene="uid://dp57ft3cbwx0u"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -26,6 +26,13 @@ config/icon="res://icon.svg"
 RngManager="*uid://crmkf4hf16p3t"
 SignalManager="*uid://wc6r8flom81c"
 GlobalConstants="*uid://dtjyyylviqrnm"
+ResourceLibrary="*uid://b3c8ci5x64qg4"
+
+[debug]
+
+gdscript/warnings/unused_signal=0
+gdscript/warnings/integer_division=0
+gdscript/warnings/narrowing_conversion=0
 
 [display]
 

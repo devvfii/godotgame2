@@ -4,6 +4,17 @@
 [ext_resource type="Script" uid="uid://d1a7fu0qyh684" path="res://ver0.4/PuzzleBoardElements/scripts/puzzle_board.gd" id="1_qc7d5"]
 [ext_resource type="Texture2D" uid="uid://b8m04w2y6cb6h" path="res://tempassets/BoardTile-Dark.png" id="2_2t33g"]
 [ext_resource type="Texture2D" uid="uid://dxfy2wxbnpu5n" path="res://tempassets/BoardTile-Light.png" id="2_qmuns"]
+[ext_resource type="Script" uid="uid://b7j1kv1cts47m" path="res://ver0.4/PuzzleBoardElements/scripts/turn_timer.gd" id="5_6tib2"]
+[ext_resource type="Texture2D" uid="uid://bd1dpdbqx5cmw" path="res://tempassets/hp_bar.png" id="5_78q8m"]
+[ext_resource type="Texture2D" uid="uid://c5hfc0vs5ksii" path="res://tempassets/hp_bar_bg.png" id="6_sno87"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_78q8m"]
+atlas = ExtResource("5_78q8m")
+region = Rect2(0, 0, 164, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sno87"]
+atlas = ExtResource("6_sno87")
+region = Rect2(0, 0, 164, 10)
 
 [node name="PuzzleBoard" type="Control" unique_id=1710562530]
 custom_minimum_size = Vector2(840, 700)
@@ -493,30 +504,17 @@ custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Button" type="Button" parent="." unique_id=1809767287]
+[node name="TurnTimer" type="TextureProgressBar" parent="." unique_id=786634438]
+z_index = 10
 layout_mode = 0
-offset_left = -130.0
-offset_top = -23.0
-offset_right = -36.0
-offset_bottom = 8.0
-text = "regenerate"
+offset_right = 40.0
+offset_bottom = 40.0
+texture_under = SubResource("AtlasTexture_78q8m")
+texture_progress = SubResource("AtlasTexture_sno87")
+script = ExtResource("5_6tib2")
 
-[node name="Button2" type="Button" parent="." unique_id=1719501442]
-layout_mode = 0
-offset_left = -130.0
-offset_top = 22.0
-offset_right = -36.0
-offset_bottom = 53.0
-text = "resolve"
+[node name="Timer" type="Timer" parent="TurnTimer" unique_id=66265626]
+wait_time = 10.0
 
-[node name="Label" type="Label" parent="." unique_id=1784432183]
-layout_mode = 0
-offset_left = -130.0
-offset_top = -64.0
-offset_right = -90.0
-offset_bottom = -41.0
-
-[connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="resized" from="GridContainer/Middle/BoardTiles/Tile" to="." method="_on_tile_resized"]
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="timeout" from="TurnTimer/Timer" to="TurnTimer" method="_on_timer_timeout"]

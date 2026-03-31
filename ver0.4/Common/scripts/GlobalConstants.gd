@@ -1,0 +1,45 @@
+extends Node
+
+enum DIRECTION {UP, UP_RIGHT, RIGHT, DOWN_RIGHT, DOWN, DOWN_LEFT, LEFT, UP_LEFT}
+enum TURN_STATES {PLANNING, EXECUTION, RESOLUTION, ENEMY}
+enum ENEMY_POSITIONS {TOP_LEFT, TOP_CENTER, TOP_RIGHT, CENTER_LEFT, CENTER, CENTER_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT}
+
+const DIRECTION_MAP = {
+	"left" : DIRECTION.LEFT,
+	"right" : DIRECTION.RIGHT,
+	"up_left" : DIRECTION.UP_LEFT,
+	"up_right" : DIRECTION.UP_RIGHT,
+	"down_left" : DIRECTION.DOWN_LEFT,
+	"down_right" : DIRECTION.DOWN_RIGHT,
+	"up" : DIRECTION.UP,
+	"down" : DIRECTION.DOWN
+}
+
+const ENEMY_POSITION_MAP = {
+	"center_left" : ENEMY_POSITIONS.CENTER_LEFT,
+	"center_right" : ENEMY_POSITIONS.CENTER_RIGHT,
+	"top_left" : ENEMY_POSITIONS.TOP_LEFT,
+	"top_right" : ENEMY_POSITIONS.TOP_RIGHT,
+	"bottom_left" : ENEMY_POSITIONS.BOTTOM_LEFT,
+	"bottom_right" : ENEMY_POSITIONS.BOTTOM_RIGHT,
+	"top_center" : ENEMY_POSITIONS.TOP_CENTER,
+	"bottom_center" : ENEMY_POSITIONS.BOTTOM_CENTER,
+	"center" : ENEMY_POSITIONS.CENTER
+}
+
+const ORB_ACTION_MAP = {
+	"block" : ActionInstance.TYPE.BLOCK,
+	"charge" : ActionInstance.TYPE.CHARGE,
+	"heal" : ActionInstance.TYPE.HEAL,
+	"melee" : ActionInstance.TYPE.MATTACK,
+	"ranged" : ActionInstance.TYPE.RATTACK
+}
+
+const TURN_STATES_MAP = {
+	"planning" : TURN_STATES.PLANNING,
+	"execution" : TURN_STATES.EXECUTION,
+	"resolution" : TURN_STATES.RESOLUTION,
+	"enemy" : TURN_STATES.ENEMY
+}
+
+var player_object

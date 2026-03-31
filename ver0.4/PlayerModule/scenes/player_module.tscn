@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://r0fq7rje7qpx"]
+
+[ext_resource type="Script" uid="uid://byyoasbvbbaw4" path="res://ver0.4/PlayerModule/scripts/Player.gd" id="1_0c06u"]
+[ext_resource type="Script" uid="uid://cxnjwn4p1fj4o" path="res://ver0.4/PlayerModule/scripts/player_module.gd" id="1_was3v"]
+[ext_resource type="Resource" uid="uid://m7h7kjhcoclh" path="res://ver0.4/PlayerModule/resources/Psi.tres" id="2_gfc18"]
+
+[node name="PlayerModule" type="Control" unique_id=317964265]
+layout_mode = 3
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_was3v")
+
+[node name="PlayerMarker" type="Marker2D" parent="." unique_id=277253919]
+position = Vector2(250, 500)
+
+[node name="Player" type="Sprite2D" parent="." unique_id=1788327087 node_paths=PackedStringArray("position_marker")]
+script = ExtResource("1_0c06u")
+position_marker = NodePath("../PlayerMarker")
+entity_data = ExtResource("2_gfc18")

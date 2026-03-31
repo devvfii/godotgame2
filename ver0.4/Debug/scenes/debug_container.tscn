@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://cldc54skeu0jr"]
+
+[ext_resource type="PackedScene" uid="uid://bm3h1loh5ehyw" path="res://ver0.4/Debug/scenes/puzzle_board_debug.tscn" id="1_rkmx1"]
+[ext_resource type="PackedScene" uid="uid://bccx7i3b1b4un" path="res://ver0.4/Debug/scenes/player_debug.tscn" id="2_5two8"]
+[ext_resource type="PackedScene" uid="uid://s8tcxoxomdsi" path="res://ver0.4/Debug/scenes/enemy_debug.tscn" id="3_7pcp1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5two8"]
+
+[node name="DebugContainer" type="TabContainer" unique_id=145103949]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_5two8")
+current_tab = 2
+
+[node name="PuzzleBoardDebug" parent="." unique_id=1482904150 instance=ExtResource("1_rkmx1")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="PlayerDebug" parent="." unique_id=1123678943 instance=ExtResource("2_5two8")]
+visible = false
+layout_mode = 2
+
+[node name="EnemyDebug" parent="." unique_id=688216037 instance=ExtResource("3_7pcp1")]
+layout_mode = 2

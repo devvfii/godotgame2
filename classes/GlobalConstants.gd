@@ -1,4 +1,4 @@
-class_name Constants
+class_name Constants_Old
 extends Node
 
 enum DIRECTION {UP, UP_RIGHT, RIGHT, DOWN_RIGHT, DOWN, DOWN_LEFT, LEFT, UP_LEFT}

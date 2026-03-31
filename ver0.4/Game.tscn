@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://dp57ft3cbwx0u"]
+
+[ext_resource type="PackedScene" uid="uid://cldc54skeu0jr" path="res://ver0.4/Debug/scenes/debug_container.tscn" id="1_epjpw"]
+[ext_resource type="PackedScene" uid="uid://4xerbhc0b6h" path="res://ver0.4/PuzzleBoardElements/scenes/puzzle_board.tscn" id="2_lcih6"]
+[ext_resource type="PackedScene" uid="uid://cbm12ycr1ceb3" path="res://ver0.4/EnemyModule/scenes/enemy_module.tscn" id="3_ocv4g"]
+[ext_resource type="Script" uid="uid://ciivfaow4guw" path="res://ver0.4/PuzzleBoardElements/scripts/turn_manager.gd" id="3_ytxj7"]
+[ext_resource type="PackedScene" uid="uid://r0fq7rje7qpx" path="res://ver0.4/PlayerModule/scenes/player_module.tscn" id="4_13lxm"]
+
+[node name="Game" type="Control" unique_id=536079924]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="TurnManager" type="Node" parent="." unique_id=699557961]
+script = ExtResource("3_ytxj7")
+
+[node name="PlayerModule" parent="." unique_id=317964265 instance=ExtResource("4_13lxm")]
+layout_mode = 1
+mouse_filter = 2
+
+[node name="EnemyModule" parent="." unique_id=1700171915 instance=ExtResource("3_ocv4g")]
+layout_mode = 1
+
+[node name="PuzzleBoard" parent="." unique_id=1710562530 instance=ExtResource("2_lcih6")]
+layout_mode = 1
+
+[node name="DebugContainer" parent="." unique_id=145103949 instance=ExtResource("1_epjpw")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 1920.0
+offset_bottom = 31.0
+grow_horizontal = 1
+grow_vertical = 1
+current_tab = 0

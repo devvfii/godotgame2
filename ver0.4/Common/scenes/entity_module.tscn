@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://chnyonwgejypp"]
+
+[ext_resource type="Script" uid="uid://btorp16lgljo0" path="res://ver0.4/Common/scripts/entity_module.gd" id="1_g7tnt"]
+[ext_resource type="Texture2D" uid="uid://5kaqebiabwy1" path="res://tempassets/enemy.png" id="2_2kybh"]
+[ext_resource type="PackedScene" uid="uid://h3n3o78bdp7w" path="res://ver0.4/Common/scenes/HealthBar.tscn" id="2_2u6jf"]
+[ext_resource type="Script" uid="uid://qqt05xehfqub" path="res://ver0.4/Common/classes/Entity.gd" id="3_2u6jf"]
+
+[node name="EntityModule" type="Control" unique_id=1072599090]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 6
+size_flags_vertical = 10
+script = ExtResource("1_g7tnt")
+
+[node name="Entity" type="Sprite2D" parent="." unique_id=1297982503]
+texture = ExtResource("2_2kybh")
+script = ExtResource("3_2u6jf")
+metadata/_custom_type_script = "uid://qqt05xehfqub"
+
+[node name="HealthBar" parent="." unique_id=1545805671 node_paths=PackedStringArray("entity_owner") instance=ExtResource("2_2u6jf")]
+layout_mode = 1
+offset_left = -200.0
+offset_top = -25.0
+offset_right = 200.0
+entity_owner = NodePath("../Entity")

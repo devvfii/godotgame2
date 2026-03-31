@@ -2,9 +2,6 @@ extends Node
 
 var rng = RandomNumberGenerator.new()
 
-var temp : Array
-var temp2 : Array
-
 func _ready():
 	rng.randomize()
 
@@ -14,25 +11,19 @@ func get_seed():
 func get_state():
 	return rng.state
 
-func set_seed(seed : int):
-	rng.set_seed(seed)
+func set_seed(rng_seed : int):
+	rng.set_seed(rng_seed)
 
 func set_state(state : int):
 	rng.set_state(state)
 
-func pick_from(input_array : Array, weights : Array = []):
-	if len(weights) == 0:
-		return input_array[rng.randi_range(0,len(input_array)-1)]
-	
-	temp = []
-	temp2 = []
-	for i in weights:
-		for j in range(i):
-			temp2 = []
-			temp2.append(i)
-		temp.append_array(temp2)
-	
-	return input_array[rng.randi_range(0,len(temp)-1)]
+func pick_from(input_array : Array, weights : Array[float] = []):
+	if input_array.is_empty():
+		return null
+	if weights.is_empty():
+		weights.resize(input_array.size())
+		weights.fill(1)
+	return input_array[rng.rand_weighted(weights)]
 
 func randf():
 	return rng.randf()
