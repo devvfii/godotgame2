@@ -3,16 +3,34 @@
 [ext_resource type="Script" uid="uid://balo5fnmu1gr3" path="res://ver0.4/EnemyModule/scripts/enemy_module.gd" id="1_qpmt1"]
 [ext_resource type="Script" uid="uid://duh42duqpgl28" path="res://ver0.4/Common/classes/MarkerNode2D.gd" id="2_lsmyy"]
 [ext_resource type="Script" uid="uid://ctobiuexw0hye" path="res://ver0.4/EnemyModule/scripts/Enemy.gd" id="3_e6ib0"]
-[ext_resource type="Script" uid="uid://dslrrjimgy2gw" path="res://ver0.4/Common/resources/EntityData.gd" id="4_x8tm6"]
+[ext_resource type="Script" uid="uid://ckxknbmensrpv" path="res://ver0.4/Common/resources/ActionInstance.gd" id="4_x8tm6"]
 [ext_resource type="Texture2D" uid="uid://5kaqebiabwy1" path="res://tempassets/enemy.png" id="5_2exk6"]
+[ext_resource type="Script" uid="uid://dhqb2wboyu6wx" path="res://ver0.4/EnemyModule/resources/EnemyData.gd" id="5_4fevg"]
 
-[sub_resource type="Resource" id="Resource_4fevg"]
+[sub_resource type="Resource" id="Resource_c3vko"]
 script = ExtResource("4_x8tm6")
-display_name = "SlimeBoss"
+damage = 30
+name = "Big Slam"
+metadata/_custom_type_script = "uid://ckxknbmensrpv"
+
+[sub_resource type="Resource" id="Resource_3ett3"]
+script = ExtResource("4_x8tm6")
+damage = 10
+name = "Debuff"
+metadata/_custom_type_script = "uid://ckxknbmensrpv"
+
+[sub_resource type="Resource" id="Resource_2pe7x"]
+script = ExtResource("4_x8tm6")
+name = "Charge"
+metadata/_custom_type_script = "uid://ckxknbmensrpv"
+
+[sub_resource type="Resource" id="Resource_4ryqu"]
+script = ExtResource("5_4fevg")
+attack_list = Array[ExtResource("4_x8tm6")]([SubResource("Resource_c3vko"), SubResource("Resource_3ett3"), SubResource("Resource_2pe7x")])
+display_name = "Slime Boss"
 texture = ExtResource("5_2exk6")
-max_hp = 150.0
-base_atk = 30.0
-metadata/_custom_type_script = "uid://dslrrjimgy2gw"
+max_hp = 100.0
+metadata/_custom_type_script = "uid://dhqb2wboyu6wx"
 
 [node name="EnemyModule" type="Control" unique_id=1863151605]
 layout_mode = 3
@@ -96,10 +114,11 @@ left = NodePath("../BottomCenter")
 up = NodePath("../Right")
 metadata/_custom_type_script = "uid://duh42duqpgl28"
 
-[node name="DebugEnemy" type="Sprite2D" parent="." unique_id=194813239]
+[node name="DebugEnemy" type="Sprite2D" parent="." unique_id=194813239 node_paths=PackedStringArray("position_marker")]
 position = Vector2(-960, 0)
 script = ExtResource("3_e6ib0")
-entity_data = SubResource("Resource_4fevg")
+position_marker = NodePath("../Markers/Center")
+entity_data = SubResource("Resource_4ryqu")
 metadata/_custom_type_script = "uid://ctobiuexw0hye"
 
 [node name="Enemies" type="Node" parent="." unique_id=1701651188]

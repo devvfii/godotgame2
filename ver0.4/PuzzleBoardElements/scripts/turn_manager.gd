@@ -1,6 +1,6 @@
 extends Node
 
-var player : Entity
+var player : Player
 var player_actions : Array[ActionInstance]
 
 var enemy : Entity
@@ -18,7 +18,7 @@ func _ready():
 	SignalManager.entity_died.connect(_on_entity_death)
 	SignalManager.turn_state_changed.connect(_on_turn_state_changed)
 	
-	start_battle(null)
+	SignalManager.enter_combat.connect(start_battle)
 
 func start_battle(enemy : Entity):
 	SignalManager.get_player_reference.emit(self)
@@ -61,8 +61,9 @@ func start_battle(enemy : Entity):
 				SignalManager.turn_state_changed.emit(GlobalConstants.TURN_STATES.ENEMY)
 				
 				SignalManager.debug_log.emit("Enemy takes turn")
-				enemy.set_target([player])
-				enemy.resolve_action(enemy.current_intent)
+				if enemy: # temp
+					enemy.set_target([player])
+					enemy.resolve_action(enemy.current_intent)
 				
 				SignalManager.debug_log.emit("Enemy turn ended")
 				SignalManager.enemy_turn_completed.emit()

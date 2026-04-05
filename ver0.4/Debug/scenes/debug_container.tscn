@@ -13,10 +13,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_5two8")
-current_tab = 2
+current_tab = 0
 
 [node name="PuzzleBoardDebug" parent="." unique_id=1482904150 instance=ExtResource("1_rkmx1")]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -25,4 +24,5 @@ visible = false
 layout_mode = 2
 
 [node name="EnemyDebug" parent="." unique_id=688216037 instance=ExtResource("3_7pcp1")]
+visible = false
 layout_mode = 2

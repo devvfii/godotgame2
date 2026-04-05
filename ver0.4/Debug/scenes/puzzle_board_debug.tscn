@@ -24,6 +24,22 @@ offset_right = 119.0
 offset_bottom = 148.0
 text = "regenerate_board"
 
+[node name="ResizeBoard" type="Button" parent="." unique_id=552652285]
+layout_mode = 0
+offset_left = 953.0
+offset_top = 113.0
+offset_right = 1100.0
+offset_bottom = 144.0
+text = "resize_board"
+
+[node name="StartBattle" type="Button" parent="." unique_id=938376711]
+layout_mode = 0
+offset_left = 955.0
+offset_top = 168.0
+offset_right = 1102.0
+offset_bottom = 199.0
+text = "start_battle"
+
 [node name="ResolveBoard" type="Button" parent="." unique_id=2129984812]
 layout_mode = 0
 offset_left = 25.0
@@ -76,5 +92,7 @@ text = "Current Turn:
 "
 
 [connection signal="pressed" from="RegenerateBoard" to="." method="_on_regenerate_board_pressed"]
+[connection signal="pressed" from="ResizeBoard" to="." method="_on_resize_board_pressed"]
+[connection signal="pressed" from="StartBattle" to="." method="_on_start_battle_pressed"]
 [connection signal="pressed" from="ResolveBoard" to="." method="_on_resolve_board_pressed"]
 [connection signal="pressed" from="ClearBoard" to="." method="_on_clear_board_pressed"]

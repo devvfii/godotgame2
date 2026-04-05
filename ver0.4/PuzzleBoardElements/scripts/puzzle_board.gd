@@ -12,12 +12,15 @@ var all_tiles : Array[Node]
 
 var orb_deletion_queue : Array[Orb]
 
+var gui_scale : GlobalConstants.GUI_SCALE
+
 func _ready():
 	SignalManager.turn_state_changed.connect(_on_turn_state_changed)
 	
 	SignalManager.clear_board.connect(clear_board)
 	SignalManager.resolve_board.connect(resolve_board)
 	SignalManager.regenerate_board.connect(regenerate_board)
+	SignalManager.resize_board.connect(resize_board)
 	
 	SignalManager.orb_selected.connect(_on_orb_selected)
 	SignalManager.orb_dropped.connect(_on_orb_dropped)
@@ -46,6 +49,9 @@ func _ready():
 				all_tiles[current_index].right = all_tiles[right_index]
 	
 	SignalManager.turn_state_changed.emit(GlobalConstants.TURN_STATES.PLANNING)
+	
+	gui_scale = GlobalConstants.SCREEN_RESOLUTIONS_MAP[DisplayServer.screen_get_usable_rect().size]
+	resize_board(gui_scale)
 
 func _unhandled_input(event):
 	if event.is_action_released("click"):
@@ -122,6 +128,18 @@ func flood_fill(current_tile : OrbTile, array : Array, type : String) -> void:
 		flood_fill(current_tile.left, array, type)
 		flood_fill(current_tile.down, array, type)
 		flood_fill(current_tile.right, array, type)
+
+func resize_board(new_size : GlobalConstants.GUI_SCALE):
+	match new_size:
+		GlobalConstants.GUI_SCALE.SMALL:
+			custom_minimum_size = Vector2(640, 540)
+		GlobalConstants.GUI_SCALE.MEDIUM:
+			custom_minimum_size = Vector2(840, 700)
+		GlobalConstants.GUI_SCALE.LARGE:
+			pass
+	set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+	SignalManager.resize_tiles.emit()
+	size = Vector2.ZERO
 
 func resolve_board() -> void:
 	var orb_matches : Array[Orb]

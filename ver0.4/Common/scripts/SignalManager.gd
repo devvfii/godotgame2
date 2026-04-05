@@ -30,12 +30,15 @@ signal clear_board()
 signal generate_orbs()
 signal regenerate_board()
 signal resolve_board()
+signal resize_board()
+signal resize_tiles()
 
 # TurnManager
 signal player_turn_completed()
 signal enemy_turn_completed()
 signal full_turn_completed()
 signal turn_state_changed(new_state : GlobalConstants.TURN_STATES)
+signal enter_combat()
 signal exit_combat(player)
 
 # Orb

@@ -29,6 +29,8 @@ func _ready() -> void:
 	SignalManager.orb_selected.connect(_on_orb_selected)
 	SignalManager.orb_dropped.connect(_on_orb_dropped)
 	SignalManager.generate_orbs.connect(generate_orb)
+	
+	SignalManager.resize_tiles.connect(_on_resized)
 
 func generate_orb() -> void:
 	if not is_instance_valid(orb):

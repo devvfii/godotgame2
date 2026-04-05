@@ -35,3 +35,11 @@ func _on_resolve_board_pressed():
 func _on_turn_state_changed(new_state : GlobalConstants.TURN_STATES):
 	turn_state_label.text = GlobalConstants.TURN_STATES.keys()[new_state]
 	
+
+
+func _on_resize_board_pressed() -> void:
+	SignalManager.resize_board.emit(GlobalConstants.SCREEN_RESOLUTIONS_MAP[DisplayServer.screen_get_usable_rect().size])
+
+
+func _on_start_battle_pressed() -> void:
+	SignalManager.enter_combat.emit(null)
